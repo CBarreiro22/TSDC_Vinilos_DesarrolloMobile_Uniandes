@@ -36,7 +36,7 @@ class OptionsFragment : Fragment() {
 
         val boton = root.findViewById<Button>(R.id.button4)
         boton.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_home)
+            findNavController().navigate(R.id.action_navigation_options_to_navigation_artist)
         }
         return root
     }
