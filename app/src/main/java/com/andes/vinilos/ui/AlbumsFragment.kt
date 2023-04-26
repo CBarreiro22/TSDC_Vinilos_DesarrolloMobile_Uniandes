@@ -1,4 +1,4 @@
-package com.andes.vinilos.ui.notifications
+package com.andes.vinilos.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.andes.vinilos.databinding.FragmentNotificationsBinding
+import com.andes.vinilos.viewmodels.AlbumsViewModel
 
-class NotificationsFragment : Fragment() {
+class AlbumsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null
 
@@ -22,14 +23,14 @@ class NotificationsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val albumsViewModel =
+            ViewModelProvider(this).get(AlbumsViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textNotifications
-        notificationsViewModel.text.observe(viewLifecycleOwner) {
+        albumsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
