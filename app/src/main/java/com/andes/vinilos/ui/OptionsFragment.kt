@@ -10,6 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.andes.vinilos.databinding.FragmentOptionsBinding
 import com.andes.vinilos.viewmodels.OptionsViewModel
 import android.widget.Button;
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.fragment.findNavController
+import com.andes.vinilos.R
 
 class OptionsFragment : Fragment() {
 
@@ -26,17 +30,17 @@ class OptionsFragment : Fragment() {
     ): View {
         val optionsViewModel =
             ViewModelProvider(this).get(OptionsViewModel::class.java)
-
+        // Inflar el layout a este fragmento
         _binding = FragmentOptionsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //val textView: TextView = binding.textDashboard
-        //optionsViewModel.text.observe(viewLifecycleOwner) {
-         //   textView.text = it
-        //}
-        val crearArtista: Button = binding.button4
+        val boton = root.findViewById<Button>(R.id.button4)
+        boton.setOnClickListener{
+            findNavController().navigate(R.id.action_navigation_dashboard_to_navigation_home)
+        }
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
