@@ -9,17 +9,17 @@
         android:id="@+id/navigation_home"
         android:name="com.andes.vinilos.ui.ArtistFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_artist" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.andes.vinilos.ui.OptionsFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_options" />
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.andes.vinilos.ui.AlbumsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_albums" />
 </navigation>

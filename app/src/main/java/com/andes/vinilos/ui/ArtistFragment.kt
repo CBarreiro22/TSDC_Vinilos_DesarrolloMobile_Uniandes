@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.andes.vinilos.databinding.FragmentHomeBinding
+import com.andes.vinilos.databinding.FragmentArtistBinding
 import com.andes.vinilos.viewmodels.ArtistsViewModel
 
 class ArtistFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentArtistBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -26,7 +26,7 @@ class ArtistFragment : Fragment() {
         val artistsViewModel =
             ViewModelProvider(this).get(ArtistsViewModel::class.java)
 
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        _binding = FragmentArtistBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
