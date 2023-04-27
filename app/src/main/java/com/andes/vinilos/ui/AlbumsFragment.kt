@@ -16,11 +16,7 @@ import com.andes.vinilos.viewmodels.AlbumsViewModel
 
 class AlbumsFragment : Fragment() {
 
-    private var _binding: FragmentAlbumsBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
-    private val binding get() = _binding!!
+    private var binding: FragmentAlbumsBinding? = null
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumsViewModel
     private var viewModelAdapter: AlbumsAdapter? = null
@@ -29,30 +25,27 @@ class AlbumsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+    ): View? {
+        binding = FragmentAlbumsBinding.inflate(inflater, container, false)
         viewModelAdapter = AlbumsAdapter()
-        return root
+        return binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recyclerView = binding.albumsRv
+        super.onViewCreated(view, savedInstanceState)
+        recyclerView = binding?.albumsRv ?: return
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val activity = requireNotNull(this.activity)
+        val activity = requireNotNull(requireActivity())
         activity.actionBar?.title = "Albums"
-        viewModel = ViewModelProvider(this, AlbumsViewModel.Factory(activity.application)).get(
-            AlbumsViewModel::class.java
-        )
+        viewModel = ViewModelProvider(this, AlbumsViewModel.Factory(activity.application))
+            .get(AlbumsViewModel::class.java)
         viewModel.albums.observe(viewLifecycleOwner) {
-            it.apply {
-                viewModelAdapter!!.albums = this
-            }
+            viewModelAdapter?.albums = it
         }
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
             if (isNetworkError) onNetworkError()
@@ -61,11 +54,11 @@ class AlbumsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+        binding = null
     }
 
     private fun onNetworkError() {
-        if (!viewModel.isNetworkErrorShown.value!!) {
+        if (viewModel.isNetworkErrorShown.value != true) {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }
