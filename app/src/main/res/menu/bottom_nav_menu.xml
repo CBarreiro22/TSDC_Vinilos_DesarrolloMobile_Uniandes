@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_artist"
+        android:icon="@drawable/artista"
+        android:title="@string/title_artist" />
+
+    <item
+        android:id="@+id/navigation_options"
+        android:icon="@drawable/anadir"
+        android:title=""/>
+
+    <item
+        android:id="@+id/navigation_albums"
+        android:icon="@drawable/album_de_musica"
+        android:title="@string/title_albums" />
+
+</menu>

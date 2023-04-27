@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_artist">
+
+    <fragment
+        android:id="@+id/navigation_artist"
+        android:name="com.andes.vinilos.ui.ArtistFragment"
+        android:label="@string/title_artist"
+        tools:layout="@layout/fragment_artist" />
+
+    <fragment
+        android:id="@+id/navigation_options"
+        android:name="com.andes.vinilos.ui.OptionsFragment"
+        tools:layout="@layout/fragment_options" >
+        <action
+            android:id="@+id/action_navigation_options_to_navigation_artist"
+            app:destination="@id/navigation_artist" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_albums"
+        android:name="com.andes.vinilos.ui.AlbumsFragment"
+        android:label="@string/title_albums"
+        tools:layout="@layout/fragment_albums" />
+</navigation>
