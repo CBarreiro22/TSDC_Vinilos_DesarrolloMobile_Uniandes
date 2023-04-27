@@ -3,4 +3,20 @@
     <string name="title_artist">Artist</string>
     <!--<string name="title_dashboard">Options</string>-->
     <string name="title_albums">Albums</string>
+    <!-- CREATE ALBUM-->
+
+    <string name="albumFecha">Fecha de lanzamiento</string>
+    <string name="nombreAlbum">Nombre</string>
+    <string name="coverAlbum">Cover</string>
+    <string name="genero1">Salsa</string>
+    <string name="genero2">Regueton</string>
+    <string name="genero3">Pop</string>
+    <string name="etiqueta1">Columbia Records</string>
+    <string name="etiqueta2">RCA Records</string>
+    <string name="etiqueta3">Atlantic Records</string>
+    <string name="seleccionGenero">Genero</string>
+    <string name="seleccionEtiqueta">Etiqueta de grabacion</string>
+    <string name="descripcionAlbum">Descripcion</string>
+    <string name="guardarAlbum">Guardar</string>
+    <string name="cancelarAlbum">Cancelar</string>
 </resources>
