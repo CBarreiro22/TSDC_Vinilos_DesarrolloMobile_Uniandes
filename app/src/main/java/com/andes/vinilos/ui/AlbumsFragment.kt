@@ -16,7 +16,11 @@ import com.andes.vinilos.viewmodels.AlbumsViewModel
 
 class AlbumsFragment : Fragment() {
 
-    private var binding: FragmentAlbumsBinding? = null
+    private var _binding: FragmentAlbumsBinding? = null
+
+    // This property is only valid between onCreateView and
+    // onDestroyView.
+    private val binding get() = _binding!!
     private lateinit var recyclerView: RecyclerView
     private lateinit var viewModel: AlbumsViewModel
     private var viewModelAdapter: AlbumsAdapter? = null
@@ -26,7 +30,7 @@ class AlbumsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentAlbumsBinding.inflate(inflater, container, false)
+        _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
         viewModelAdapter = AlbumsAdapter()
         return binding?.root
     }
@@ -54,7 +58,7 @@ class AlbumsFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        binding = null
+        _binding = null
     }
 
     private fun onNetworkError() {
