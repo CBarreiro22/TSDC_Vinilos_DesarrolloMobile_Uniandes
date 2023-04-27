@@ -29,9 +29,9 @@ class AlbumsFragment : Fragment() {
         _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textAlbums
+        //val textView: TextView = binding.textAlbums
         albumsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+            //textView.text = it
         }
         return root
     }
