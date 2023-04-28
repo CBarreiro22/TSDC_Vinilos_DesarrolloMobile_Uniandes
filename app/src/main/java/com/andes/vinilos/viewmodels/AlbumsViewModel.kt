@@ -12,6 +12,7 @@ import com.andes.vinilos.network.NetworkServiceAdapter
 class AlbumsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _albums = MutableLiveData<List<Album>>()
+    /*private val albumsRepository = AlbumRepository(application)*/
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
     val albums: LiveData<List<Album>>
@@ -26,6 +27,13 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun refreshDataFormNetwork() {
+       /** albumsRepository.refreshData({
+            _albums.postValue(it)
+            _eventNetworkError.value = false
+            _isNetworkErrorShown.value = false
+        },{
+            _eventNetworkError.value = true
+        })*/
         NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
             _albums.postValue(it)
             _eventNetworkError.value = false
