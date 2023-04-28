@@ -33,21 +33,23 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(mContext)
     }
 
-    fun createAlbum(body: JSONObject,  onComplete:(resp:JSONObject)->Unit , onError: (error:VolleyError)->Unit){
-        val queue = Volley.newRequestQueue(mContext)
-
-
-
-
-        requestQueue.add(postRequest(
-            "albums", body,
-            Response.Listener<JSONObject> { response ->
-                onComplete(response)
-            },
-            Response.ErrorListener {
-                onError(it)
-            }
-        ))
+    fun createAlbum(
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        Log.d("create album", "body$body")
+        requestQueue.add(
+            postRequest(
+                "albums", body,
+                { response ->
+                    onComplete(response)
+                },
+                {
+                    onError(it)
+                }, null
+            )
+        )
 
     }
 
@@ -56,15 +58,37 @@ class NetworkServiceAdapter constructor(context: Context) {
         path: String,
         body: JSONObject,
         responseListener: Response.Listener<JSONObject>,
-        errorListener: Response.ErrorListener
+        errorListener: Response.ErrorListener,
+        headers: HashMap<String, String>? = null
     ): JsonObjectRequest {
-        return JsonObjectRequest(
-            Request.Method.POST,
+        return object : JsonObjectRequest(
+            Method.POST,
             BASE_URL + path,
             body,
             responseListener,
             errorListener
-        )
+        ) {
+            override fun getHeaders(): Map<String, String> {
+                Log.d("networkservice adapter", "adding headers")
+                val headersMap = HashMap<String, String>()
+                headersMap["Content-Type"] = "application/json"
+                headersMap["Accept"] = "*/*"
+                headersMap["Accept-Encoding"] = "gzip, deflate, br"
+                headers?.let { headersMap.putAll(it) }
+                return headersMap
+            }
+
+            fun onErrorResponse(error: VolleyError?) {
+
+                Log.e(
+                    "NetworkServiceAdapter",
+                    "Error al hacer la petición: ${error?.networkResponse?.statusCode} ${
+                        error?.networkResponse?.data?.toString(Charsets.UTF_8)
+                    }"
+                )
+            }
+        }
     }
+
 
 }
