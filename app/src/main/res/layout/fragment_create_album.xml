@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CreateAlbumFragment">
+    tools:context=".ui.SaveAlbumFragment">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -63,15 +64,19 @@
                         android:inputType="text"
                         android:textSize="24sp" />
 
-                    <EditText
-                        android:id="@+id/fechaLanzamiento"
-                        android:layout_width="fill_parent"
+                    <Button
+                        android:id="@+id/datePickerButton"
+                        android:layout_width="250dp"
                         android:layout_height="wrap_content"
-                        android:clickable="true"
-                        android:ems="10"
-                        android:hint="@string/albumFecha"
-                        android:inputType="date"
-                        android:textSize="24sp" />
+                        android:text="Fecha de lanzamiento"
+                        android:textSize="15sp"
+                        android:textColor="@color/black"
+                        style="?android:spinnerStyle"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView"
+                        android:layout_marginTop="10dp"
+                        android:onClick="showDatePickerDialog"/>
 
                     <Spinner
                         android:id="@+id/albumGeneros"
@@ -89,8 +94,11 @@
                         android:prompt="@string/seleccionEtiqueta"
                         android:textSize="24sp" />
 
+
+
+
                     <EditText
-                        android:id="@+id/editTextTextMultiLine"
+                        android:id="@+id/descripcionAlbum"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:ems="10"
@@ -109,14 +117,16 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/cancelarAlbum" />
+                            android:text="@string/cancelarAlbum"
+                            app:backgroundTint="#E91E63" />
 
                         <Button
                             android:id="@+id/guardarCrearAlbum"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="@string/guardarAlbum" />
+                            android:text="@string/guardarAlbum"
+                            app:backgroundTint="#4CAF50" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

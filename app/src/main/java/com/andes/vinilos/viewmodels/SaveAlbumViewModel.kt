@@ -2,6 +2,6 @@ package com.andes.vinilos.viewmodels
 
 import androidx.lifecycle.ViewModel
 
-class CreateAlbumViewModel : ViewModel() {
+class SaveAlbumViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }
