@@ -16,6 +16,8 @@ android {
         targetSdk 33
         versionCode 1
         versionName "1.0"
+        // Enabling multidex support.
+        multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -43,6 +45,10 @@ android {
     viewBinding {
         enabled true
     }
+
+    packagingOptions {
+        pickFirst 'androidsupportmultidexversion.txt'
+    }
 }
 
 dependencies {
@@ -64,4 +70,5 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.8'
     testImplementation 'org.mockito:mockito-core:4.1.0'
     implementation "io.coil-kt:coil:1.1.1"
+    implementation 'com.android.support:multidex:1.0.3'
 }

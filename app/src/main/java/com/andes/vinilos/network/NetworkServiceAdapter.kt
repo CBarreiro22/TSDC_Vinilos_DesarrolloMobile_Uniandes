@@ -1,6 +1,7 @@
 package com.andes.vinilos.network
 
 import android.content.Context
+import android.util.Log
 import com.andes.vinilos.models.Album
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -11,9 +12,7 @@ import com.android.volley.toolbox.Volley
 import org.json.JSONObject
 import com.google.gson.Gson
 import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import org.json.JSONArray
-import org.json.JSONObject
 import javax.xml.transform.ErrorListener
 
 class NetworkServiceAdapter constructor(context: Context) {
@@ -63,10 +62,11 @@ class NetworkServiceAdapter constructor(context: Context) {
         path: String,
         body: JSONObject,
         responseListener: Response.Listener<JSONObject>,
-        errorListener: Response.ErrorListener
+        errorListener: Response.ErrorListener,
+        headers: HashMap<String, String>? = null
     ): JsonObjectRequest {
-        return JsonObjectRequest(
-            Request.Method.POST,
+        return object : JsonObjectRequest(
+            Method.POST,
             BASE_URL + path,
             body,
             responseListener,
