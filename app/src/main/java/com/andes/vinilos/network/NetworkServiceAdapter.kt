@@ -3,9 +3,12 @@ package com.andes.vinilos.network
 import android.content.Context
 import android.util.Log
 import com.andes.vinilos.models.Album
+import com.andes.vinilos.models.NewAlbum
+import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
+import com.android.volley.RetryPolicy
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
@@ -82,6 +85,14 @@ class NetworkServiceAdapter constructor(context: Context) {
                 return headersMap
             }
 
+            override fun getRetryPolicy(): RetryPolicy {
+                return DefaultRetryPolicy(
+                    5000,  // 5 seconds timeout
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+                )
+            }
+
             fun onErrorResponse(error: VolleyError?) {
 
                 Log.e(
@@ -94,15 +105,16 @@ class NetworkServiceAdapter constructor(context: Context) {
         }
     }
 
-    fun getAlbums(onComplete: (resp: List<Album>) -> Unit, onError: (error: VolleyError) -> Unit) {
+
+    fun getAlbums(onComplete: (resp: List<NewAlbum>) -> Unit, onError: (error: VolleyError) -> Unit) {
         requestQueue.add(getRequest("albums", { response ->
             val resp = JSONArray(response)
-            val list = mutableListOf<Album>()
+            val list = mutableListOf<NewAlbum>()
             for (i in 0 until resp.length()) {
                 val item = resp.getJSONObject(i)
                 list.add(
-                    i, Album(
-                        albumId = item.getInt("id"),
+                    i, NewAlbum(
+                        id = item.getInt("id"),
                         name = item.getString("name"),
                         cover = item.getString("cover"),
                         recordLabel = item.getString("recordLabel"),

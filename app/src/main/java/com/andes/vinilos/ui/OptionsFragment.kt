@@ -36,7 +36,7 @@ class OptionsFragment : Fragment() {
 
         val boton = root.findViewById<Button>(R.id.button4)
         boton.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_options_to_createAlbumFragment)
+            findNavController().navigate(R.id.action_navigation_options_to_saveAlbumFragment)
         }
         return root
     }

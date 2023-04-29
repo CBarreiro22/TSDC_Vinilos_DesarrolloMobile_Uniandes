@@ -87,11 +87,6 @@ class SaveAlbumFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (albumCoverWritten.length < 5 || albumCoverWritten.length > 50) {
-                albumCoverElement.error = "El campo cover debe tener entre 5 y 50 caracteres"
-                return@setOnClickListener
-            }
-
             if(albumDescriptionWritten.isEmpty()){
                 albumDescriptionElement.error = "El campo descripcion es obligatorio"
                 return@setOnClickListener

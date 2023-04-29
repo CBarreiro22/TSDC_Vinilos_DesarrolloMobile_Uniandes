@@ -62,7 +62,9 @@
                         android:ems="10"
                         android:hint="@string/coverAlbum"
                         android:inputType="text"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textIsSelectable="true"
+                        />
 
                     <Button
                         android:id="@+id/datePickerButton"

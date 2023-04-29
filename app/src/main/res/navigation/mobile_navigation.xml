@@ -16,8 +16,8 @@
         android:name="com.andes.vinilos.ui.OptionsFragment"
         tools:layout="@layout/fragment_options" >
         <action
-            android:id="@+id/action_navigation_options_to_navigation_artist"
-            app:destination="@id/navigation_artist" />
+            android:id="@+id/action_navigation_options_to_saveAlbumFragment"
+            app:destination="@id/saveAlbumFragment" />
     </fragment>
 
     <fragment
@@ -25,4 +25,13 @@
         android:name="com.andes.vinilos.ui.AlbumsFragment"
         android:label="@string/title_albums"
         tools:layout="@layout/fragment_albums" />
+    <fragment
+        android:id="@+id/saveAlbumFragment"
+        android:name="com.andes.vinilos.ui.SaveAlbumFragment"
+        android:label="fragment_create_album"
+        tools:layout="@layout/fragment_create_album" >
+        <action
+            android:id="@+id/action_saveAlbumFragment_to_navigation_albums"
+            app:destination="@id/navigation_albums" />
+    </fragment>
 </navigation>
