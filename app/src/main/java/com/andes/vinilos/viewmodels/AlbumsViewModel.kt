@@ -7,15 +7,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.andes.vinilos.models.Album
+import com.andes.vinilos.models.NewAlbum
 import com.andes.vinilos.network.NetworkServiceAdapter
 
 class AlbumsViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _albums = MutableLiveData<List<Album>>()
+    private val _albums = MutableLiveData<List<NewAlbum>>()
     /*private val albumsRepository = AlbumRepository(application)*/
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-    val albums: LiveData<List<Album>>
+    val albums: LiveData<List<NewAlbum>>
         get() = _albums
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError

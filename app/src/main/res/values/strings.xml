@@ -5,4 +5,22 @@
     <string name="title_albums">Albums</string>
     <string name="album_name_placeholder"></string>
     <string name="album_description_placeholder"></string>
+    <!-- CREATE ALBUM-->
+    <string name="albumFecha">Fecha de lanzamiento</string>
+    <string name="nombreAlbum">Nombre</string>
+    <string name="coverAlbum">Cover</string>
+    <string name="genero1">Salsa</string>
+    <string name="genero2">Rock</string>
+    <string name="genero3">Folk</string>
+    <string name="genero4">Classical</string>
+    <string name="etiqueta1">Sony Music</string>
+    <string name="etiqueta2">EMI</string>
+    <string name="etiqueta3">Discos Fuentes</string>
+    <string name="etiqueta4">Elektra</string>
+    <string name="etiqueta5">Fania Records</string>
+    <string name="seleccionGenero">Genero</string>
+    <string name="seleccionEtiqueta">Etiqueta de grabacion</string>
+    <string name="descripcionAlbum">Descripcion</string>
+    <string name="guardarAlbum">Guardar</string>
+    <string name="cancelarAlbum">Cancelar</string>
 </resources>

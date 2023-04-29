@@ -9,7 +9,7 @@
     <item
         android:id="@+id/navigation_options"
         android:icon="@drawable/anadir"
-        android:title=""/>
+        android:title="Añadir premio"/>
 
     <item
         android:id="@+id/navigation_albums"
