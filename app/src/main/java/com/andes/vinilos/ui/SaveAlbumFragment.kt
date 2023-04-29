@@ -11,15 +11,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
+import android.widget.Toast
+import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import com.andes.vinilos.R
 import com.andes.vinilos.databinding.FragmentCreateAlbumBinding
+import com.andes.vinilos.models.Album
 import com.andes.vinilos.viewmodels.OptionsViewModel
+import com.andes.vinilos.viewmodels.SaveAlbumViewModel
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class SaveAlbumFragment : Fragment() {
 
     private var _binding: FragmentCreateAlbumBinding? = null
+    private lateinit var saveAlbumViewModel: SaveAlbumViewModel
+    private var selectedDate: Calendar = Calendar.getInstance()
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -106,7 +114,19 @@ class SaveAlbumFragment : Fragment() {
                 button.error = null
             }
 
+            val albumDateFormat = SimpleDateFormat("dd-MM-yyyy")
+            val albumDate = albumDateFormat.format(selectedDate.time)
 
+            val album = Album(
+                albumNameWritten,
+                albumCoverWritten,
+                albumDate,
+                albumDescriptionWritten,
+                albumGenreSelected,
+                albumRecordLabelSelected
+            )
+
+            saveAlbum(album)
 
         }
 
@@ -117,6 +137,41 @@ class SaveAlbumFragment : Fragment() {
         return root
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        val activity = requireNotNull(this.activity) {
+            "You can only access the viewModel after onActivityCreated()"
+        }
+        saveAlbumViewModel = ViewModelProvider(this).get(SaveAlbumViewModel::class.java)
+
+        saveAlbumViewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
+            if (isNetworkError) onNetworkError()
+        })
+    }
+
+    private fun onNetworkError() {
+        if(!saveAlbumViewModel.isNetworkErrorShown.value!!) {
+            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            saveAlbumViewModel.onNetworkErrorShown()
+        }
+    }
+
+    private fun saveAlbum(album: Album) {
+        lifecycleScope.launch {
+            saveAlbumViewModel.saveAlbum(album,
+                onSuccess = {
+                    val toast = Toast.makeText(requireContext(), "Se ha creado el album exitosamente", Toast.LENGTH_LONG)
+                    toast.show()
+                },
+                onError = {
+                    val toast = Toast.makeText(requireContext(), "No se pudo guardar el album en estos momentos", Toast.LENGTH_LONG)
+                    toast.show()
+                }
+            )
+        }
+    }
+
+
     private fun onDatePickerButtonClick(view: View) {
         val currentDate = Calendar.getInstance()
         val year = currentDate.get(Calendar.YEAR)
@@ -125,8 +180,8 @@ class SaveAlbumFragment : Fragment() {
 
         val datePickerDialog = DatePickerDialog(view.context, DatePickerDialog.OnDateSetListener { _, selectedYear, selectedMonth, selectedDayOfMonth ->
             // Update text of the button with the selected date
-            val selectedDate = "$selectedDayOfMonth-${selectedMonth+1}-$selectedYear"
-            (view as Button).text = selectedDate
+            selectedDate.set(selectedYear, selectedMonth, selectedDayOfMonth)
+            (view as Button).text = "$selectedDayOfMonth-${selectedMonth+1}-$selectedYear"
             dateSelected = true
         }, year, month, day)
 
