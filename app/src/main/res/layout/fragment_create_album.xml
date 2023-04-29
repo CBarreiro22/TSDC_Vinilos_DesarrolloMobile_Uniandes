@@ -15,26 +15,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#AAAAAA"
-                android:minHeight="?attr/actionBarSize"
-                android:theme="?attr/actionBarTheme">
-
-                <TextView
-                    android:id="@+id/textView4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="sans-serif-light"
-                    android:text="CREAR ALBUM"
-                    android:textAlignment="center"
-                    android:textColor="#EDEDED"
-                    android:textSize="34sp"
-                    android:textStyle="bold" />
-            </androidx.appcompat.widget.Toolbar>
-
 
             <LinearLayout
                 android:layout_width="match_parent"

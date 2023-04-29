@@ -33,11 +33,6 @@ class OptionsFragment : Fragment() {
         // Inflar el layout a este fragmento
         _binding = FragmentOptionsBinding.inflate(inflater, container, false)
         val root: View = binding.root
-
-        val boton = root.findViewById<Button>(R.id.button4)
-        boton.setOnClickListener{
-            findNavController().navigate(R.id.action_navigation_options_to_saveAlbumFragment)
-        }
         return root
     }
 

@@ -14,6 +14,7 @@ import android.widget.Spinner
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.andes.vinilos.R
 import com.andes.vinilos.databinding.FragmentCreateAlbumBinding
 import com.andes.vinilos.models.Album
@@ -109,7 +110,7 @@ class SaveAlbumFragment : Fragment() {
                 button.error = null
             }
 
-            val albumDateFormat = SimpleDateFormat("dd-MM-yyyy")
+            val albumDateFormat = SimpleDateFormat("yyyy-MM-dd")
             val albumDate = albumDateFormat.format(selectedDate.time)
 
             val album = Album(
@@ -120,13 +121,13 @@ class SaveAlbumFragment : Fragment() {
                 albumGenreSelected,
                 albumRecordLabelSelected
             )
-
             saveAlbum(album)
 
         }
 
         cancelAlbumButton.setOnClickListener{
-            Log.d("pppppp", "ppppppp")
+            Log.d("cancelAlbumButton", "cancelAlbumButton")
+            findNavController().navigate(R.id.action_saveAlbumFragment_to_navigation_albums)
         }
 
         return root
@@ -157,6 +158,7 @@ class SaveAlbumFragment : Fragment() {
                 onSuccess = {
                     val toast = Toast.makeText(requireContext(), "Se ha creado el album exitosamente", Toast.LENGTH_LONG)
                     toast.show()
+                    findNavController().navigate(R.id.action_saveAlbumFragment_to_navigation_albums)
                 },
                 onError = {
                     val toast = Toast.makeText(requireContext(), "No se pudo guardar el album en estos momentos", Toast.LENGTH_LONG)

@@ -24,11 +24,15 @@
         android:id="@+id/navigation_albums"
         android:name="com.andes.vinilos.ui.AlbumsFragment"
         android:label="@string/title_albums"
-        tools:layout="@layout/fragment_albums" />
+        tools:layout="@layout/fragment_albums" >
+        <action
+            android:id="@+id/action_navigation_albums_to_saveAlbumFragment"
+            app:destination="@id/saveAlbumFragment" />
+    </fragment>
     <fragment
         android:id="@+id/saveAlbumFragment"
         android:name="com.andes.vinilos.ui.SaveAlbumFragment"
-        android:label="fragment_create_album"
+        android:label="CREAR ALBUM"
         tools:layout="@layout/fragment_create_album" >
         <action
             android:id="@+id/action_saveAlbumFragment_to_navigation_albums"
