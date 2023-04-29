@@ -28,15 +28,9 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun refreshDataFormNetwork() {
-       /** albumsRepository.refreshData({
-            _albums.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })*/
         NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
-            _albums.postValue(it)
+            val sortedAlbums = it.sortedBy { album -> album.name.lowercase() }
+            _albums.postValue(sortedAlbums)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         }, {
