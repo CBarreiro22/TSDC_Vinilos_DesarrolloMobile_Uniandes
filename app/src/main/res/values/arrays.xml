@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- CREATE ALBUM-->
+    <string-array name="generos">
+        <item>@string/genero1</item>
+        <item>@string/genero2</item>
+        <item>@string/genero3</item>
+        <item>@string/genero4</item>
+    </string-array>
+    <string-array name="etiquetasGrabacion">
+        <item>@string/etiqueta1</item>
+        <item>@string/etiqueta2</item>
+        <item>@string/etiqueta3</item>
+        <item>@string/etiqueta4</item>
+        <item>@string/etiqueta5</item>
+    </string-array>
+
+</resources>
