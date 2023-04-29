@@ -6,7 +6,7 @@
     <data>
         <variable
             name="album"
-            type="com.andes.vinilos.models.Album" />
+            type="com.andes.vinilos.models.NewAlbum" />
     </data>
 
 
@@ -17,7 +17,6 @@
         android:padding="8dp">
 
         <ScrollView
-            android:id="@+id/scrollAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fillViewport="true">
