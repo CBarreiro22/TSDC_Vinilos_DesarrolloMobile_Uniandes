@@ -12,6 +12,15 @@ class AlbumRepository (val application: Application){
 
     private val networkServiceAdapter = NetworkServiceAdapter.getInstance(application)
 
+    fun refreshData(callback: (List<NewAlbum>)->Unit, onError: (VolleyError)->Unit) {
+        //Determinar la fuente de datos que se va a utilizar. Si es necesario consultar la red, ejecutar el siguiente código
+        networkServiceAdapter.getAlbums({
+            //Guardar los albumes de la variable it en un almacén de datos local para uso futuro
+            callback(it)
+        },
+            onError
+        )
+    }
     fun createAlbum(album: Album, onError: (VolleyError) -> Unit, onSuccess: (NewAlbum) -> Unit) {
         val requestBody = Gson().toJson(album)
 

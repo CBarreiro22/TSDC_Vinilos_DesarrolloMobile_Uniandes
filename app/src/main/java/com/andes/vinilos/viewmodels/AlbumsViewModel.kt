@@ -9,11 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.NewAlbum
 import com.andes.vinilos.network.NetworkServiceAdapter
+import com.andes.vinilos.repositories.AlbumRepository
 
 class AlbumsViewModel(application: Application) : AndroidViewModel(application) {
-
     private val _albums = MutableLiveData<List<NewAlbum>>()
-    /*private val albumsRepository = AlbumRepository(application)*/
+    private val albumsRepository = AlbumRepository(application)
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
     val albums: LiveData<List<NewAlbum>>
@@ -28,9 +28,8 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun refreshDataFormNetwork() {
-        NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
-            val sortedAlbums = it.sortedBy { album -> album.name.lowercase() }
-            _albums.postValue(sortedAlbums)
+        albumsRepository.refreshData({
+            _albums.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         }, {
@@ -42,7 +41,9 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
         _isNetworkErrorShown.value = true
     }
 
-    class Factory(val app: Application) : ViewModelProvider.Factory {
+    class Factory(
+        val app: Application
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumsViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
