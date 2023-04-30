@@ -8,11 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.network.NetworkServiceAdapter
+import com.andes.vinilos.repositories.AlbumRepository
 
 class AlbumsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _albums = MutableLiveData<List<Album>>()
-    /*private val albumsRepository = AlbumRepository(application)*/
+    private val albumsRepository = AlbumRepository(application)
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
     val albums: LiveData<List<Album>>
@@ -27,14 +28,7 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
     }
 
     private fun refreshDataFormNetwork() {
-       /** albumsRepository.refreshData({
-            _albums.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })*/
-        NetworkServiceAdapter.getInstance(getApplication()).getAlbums({
+        albumsRepository.refreshData({
             _albums.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
