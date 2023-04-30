@@ -19,12 +19,17 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+    // ViewHolder for each album
     class AlbumViewHolder(val viewDataBinding: AlbumItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
+
+        // layout resource ID for the album item view
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.album_item
         }
+
+        // bind the album data to the album item view using Glide for image loading
         fun bind(album: NewAlbum) {
             Glide.with(itemView)
                 .load(album.cover.toUri().buildUpon().scheme("https").build())
@@ -37,12 +42,14 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         }
     }
 
+    // list of albums to display
     var albums: List<NewAlbum> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
 
+    // create a new AlbumViewHolder instance for each album item view
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val withDataBinding: AlbumItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -53,15 +60,20 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         return AlbumViewHolder(withDataBinding)
     }
 
+    // return the number of albums in the list
     override fun getItemCount(): Int {
         return albums.size
     }
 
+    // bind the album data to the album item view
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
+        // set the album data to the album item view using data binding
         holder.viewDataBinding.also {
             it.album = albums[position]
         }
+        // bind the album data to the album item view
         holder.bind(albums[position])
+        // set a click listener for the album item view
         holder.viewDataBinding.root.setOnClickListener {
 
         }
