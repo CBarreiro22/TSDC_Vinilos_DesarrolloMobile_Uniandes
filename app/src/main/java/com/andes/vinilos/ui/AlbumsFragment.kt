@@ -1,5 +1,6 @@
 package com.andes.vinilos.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,8 +9,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.andes.vinilos.R
 import com.andes.vinilos.databinding.FragmentAlbumsBinding
 import com.andes.vinilos.ui.adapters.AlbumsAdapter
 import com.andes.vinilos.viewmodels.AlbumsViewModel
@@ -32,6 +35,10 @@ class AlbumsFragment : Fragment() {
     ): View? {
         _binding = FragmentAlbumsBinding.inflate(inflater, container, false)
         viewModelAdapter = AlbumsAdapter()
+
+        binding.saveAlbumFloatingButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_albums_to_saveAlbumFragment)
+        }
         return binding?.root
     }
 
