@@ -10,6 +10,7 @@ import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.PickerActions.setDate;
 import static androidx.test.espresso.matcher.ViewMatchers.hasBackground;
+import static androidx.test.espresso.matcher.ViewMatchers.hasErrorText;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -107,6 +108,81 @@ public class TestAlbumCreate {
 
         // Guardar y crear el album
         onView(withId(R.id.guardarCrearAlbum)).perform(scrollTo(), click());
+
+        SystemClock.sleep(1500);
+    }
+    @Test
+    public void Escenario2() {
+
+        // Desplegar pantalla para creación de Album
+        onView(withId(R.id.saveAlbumFloatingButton)).perform(click());
+        SystemClock.sleep(1500);
+
+        // Diligenciar campos del formulario
+        onView(withId(R.id.nombreAlbum)).perform(typeText("A"));
+        onView(withId(R.id.albumGeneros)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Rock"))).perform(click());
+        onView(withId(R.id.albumGeneros)).check(matches(withSpinnerText(containsString("Rock"))));
+
+        ViewInteraction etiquetasGrabacionesSpinner = onView(withId(R.id.etiquetasGrabaciones));
+        etiquetasGrabacionesSpinner.perform(scrollTo(), click());
+        onView(withText("EMI")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
+
+        onView(withId(R.id.cover)).perform(typeText("https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg"));
+
+        ViewInteraction descripcionAlbumEditText = onView(withId(R.id.descripcionAlbum));
+        descripcionAlbumEditText.perform(scrollTo(), clearText(), typeText("Esto es un superalbum infinito"), closeSoftKeyboard());
+
+        // Seleccionar fecha de lanzamiento
+        onView(withId(R.id.datePickerButton)).perform(scrollTo(), click());
+        SystemClock.sleep(1000);
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        onView(instanceOf(DatePicker.class)).perform(PickerActions.setDate(year, month, dayOfMonth));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        // Cancelar album
+        onView(withId(R.id.cancelarCrearAlbum)).perform(scrollTo(), click());
+
+        SystemClock.sleep(1500);
+    }
+    @Test
+    public void Escenario3() {
+
+        // Desplegar pantalla para creación de Album
+        onView(withId(R.id.saveAlbumFloatingButton)).perform(click());
+        SystemClock.sleep(1500);
+
+        // Diligenciar campos del formulario
+        onView(withId(R.id.nombreAlbum)).perform(typeText(""));
+        onView(withId(R.id.albumGeneros)).perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Rock"))).perform(click());
+        onView(withId(R.id.albumGeneros)).check(matches(withSpinnerText(containsString("Rock"))));
+
+        ViewInteraction etiquetasGrabacionesSpinner = onView(withId(R.id.etiquetasGrabaciones));
+        etiquetasGrabacionesSpinner.perform(scrollTo(), click());
+        onView(withText("EMI")).inRoot(RootMatchers.isPlatformPopup()).perform(click());
+
+        onView(withId(R.id.cover)).perform(typeText("https://www.cleverfiles.com/howto/wp-content/uploads/2018/03/minion.jpg"));
+
+        ViewInteraction descripcionAlbumEditText = onView(withId(R.id.descripcionAlbum));
+        descripcionAlbumEditText.perform(scrollTo(), clearText(), typeText("Esto es un superalbum infinito"), closeSoftKeyboard());
+
+        // Seleccionar fecha de lanzamiento
+        onView(withId(R.id.datePickerButton)).perform(scrollTo(), click());
+        SystemClock.sleep(1000);
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        onView(instanceOf(DatePicker.class)).perform(PickerActions.setDate(year, month, dayOfMonth));
+        onView(withId(android.R.id.button1)).perform(click());
+
+        // Guardar y crear el album
+        onView(withId(R.id.guardarCrearAlbum)).perform(scrollTo(), click());
+        onView(withId(R.id.nombreAlbum)).check(matches(hasErrorText("El campo nombre es obligatorio")));
 
         SystemClock.sleep(1500);
     }

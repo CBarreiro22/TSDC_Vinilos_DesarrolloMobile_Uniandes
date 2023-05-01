@@ -6,6 +6,7 @@ import android.view.View;
 
 import androidx.test.core.app.ApplicationProvider;
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.action.ViewActions;
 import androidx.test.espresso.contrib.RecyclerViewActions;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -52,7 +53,7 @@ public class TestAlbum {
     }
 
     @Test
-    public void mainActivityTest() {
+    public void albumeListTest() {
         onView(withId(R.id.navigation_albums)).perform(click());
         SystemClock.sleep(1500);
 
@@ -62,7 +63,6 @@ public class TestAlbum {
         //validar Nombre de genero
         ViewInteraction generoName = onView(withId(R.id.albumGenre));
         ViewInteraction cover = onView(withId(R.id.cover));
-
     }
 
     public static Matcher<View> withIndex(final Matcher<View> matcher, final int index) {
