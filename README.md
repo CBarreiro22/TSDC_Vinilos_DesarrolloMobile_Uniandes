@@ -46,7 +46,9 @@ Luego dirigirse a la ruta ```app/src/androidTest/java/com.andes.vinilos/```
 
 ![image](https://user-images.githubusercontent.com/111206402/235320968-562baa92-90e6-4e2d-8fdb-c0b325b70c4f.png)
 
-Para correr los test se puede correr desde el android studio en la parte superior o seleccionar click derecho y correr el archivo 
+Para correr los test se puede correr desde el android studio en la parte superior o seleccionar click derecho y correr el archivo
+
+
 ![image](https://user-images.githubusercontent.com/111206402/235383611-abf3ff4e-4f74-4946-a959-c3d6b893e3ac.png)
 
 
