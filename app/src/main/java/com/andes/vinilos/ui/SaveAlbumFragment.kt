@@ -55,7 +55,6 @@ class SaveAlbumFragment : Fragment() {
         }
 
         saveAlbumButton.setOnClickListener{
-            Log.d("llego", "llego")
             // Catch value objects
             var albumNameElement: EditText = binding.nombreAlbum
             var albumNameWritten = albumNameElement.text.toString()
