@@ -2,6 +2,7 @@ package com.andes.vinilos.network
 
 import android.content.Context
 import com.andes.vinilos.models.Album
+import com.andes.vinilos.models.Musician
 import com.andes.vinilos.models.NewAlbum
 import com.android.volley.Request
 import com.android.volley.RequestQueue
@@ -81,6 +82,8 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
                 Response.ErrorListener { error -> cont.resumeWithException(error) }
             )
         )
+    }
+    suspend fun getMusician(): List<Musician> = suspendCoroutine { cont ->
     }
 
     private fun getRequest(
