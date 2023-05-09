@@ -44,7 +44,7 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
         get() = _isNetworkErrorShown
 
     // Initialize the ViewModel by refreshing data from the network
-    init {
+    init {  
         refreshDataFromNetwork()
     }
 
@@ -53,7 +53,7 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
         try {
             viewModelScope.launch (Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = albumsRepository.refreshData()
+                    var data = albumsRepository.refreshData().sortedWith(albumNameComparator)
                     _albums.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
