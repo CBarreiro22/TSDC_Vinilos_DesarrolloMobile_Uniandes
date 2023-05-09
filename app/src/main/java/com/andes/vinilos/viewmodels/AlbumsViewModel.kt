@@ -44,7 +44,7 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
         get() = _isNetworkErrorShown
 
     // Initialize the ViewModel by refreshing data from the network
-    init {  
+    init {
         refreshDataFromNetwork()
     }
 
