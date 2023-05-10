@@ -6,5 +6,5 @@ data class Musician (
     val image: String,
     val description: String,
     val birthDate:String,
-    val albums: MutableList<NewAlbum>
+    val albums: MutableList<Album>
 )

@@ -3,7 +3,6 @@ package com.andes.vinilos.network
 import android.content.Context
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
-import com.andes.vinilos.models.NewAlbum
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -56,17 +55,17 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         )
     }
 
-    suspend fun getAlbums(): List<NewAlbum> = suspendCoroutine { cont ->
+    suspend fun getAlbums(): List<Album> = suspendCoroutine { cont ->
         requestQueue.add(
             getRequest(
                 "albums",
                 Response.Listener<String> { response ->
                     val resp = JSONArray(response)
-                    val list = mutableListOf<NewAlbum>()
+                    val list = mutableListOf<Album>()
                     for (i in 0 until resp.length()) {
                         val item = resp.getJSONObject(i)
                         list.add(
-                            i, NewAlbum(
+                            i, Album(
                                 id = item.getInt("id"),
                                 name = item.getString("name"),
                                 cover = item.getString("cover"),

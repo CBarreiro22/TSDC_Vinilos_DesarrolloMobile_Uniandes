@@ -6,7 +6,7 @@
     <data>
         <variable
             name="album"
-            type="com.andes.vinilos.models.NewAlbum" />
+            type="com.andes.vinilos.models.Album" />
     </data>
 
 

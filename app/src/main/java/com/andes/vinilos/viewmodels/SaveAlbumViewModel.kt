@@ -26,14 +26,14 @@ class SaveAlbumViewModel(application: Application) : AndroidViewModel(applicatio
 
     private val networkServiceAdapter = NetworkServiceAdapter.getInstance(application)
 
-    fun saveAlbum(album: Album, onSuccess: () -> Unit, onError: () -> Unit) {
+    fun saveAlbum(Album: Album, onSuccess: () -> Unit, onError: () -> Unit) {
         val jsonObject = JSONObject()
-        jsonObject.put("name", album.name)
-        jsonObject.put("cover", album.cover)
-        jsonObject.put("recordLabel", album.recordLabel)
-        jsonObject.put("releaseDate", album.releaseDate)
-        jsonObject.put("genre", album.genre)
-        jsonObject.put("description", album.description)
+        jsonObject.put("name", Album.name)
+        jsonObject.put("cover", Album.cover)
+        jsonObject.put("recordLabel", Album.recordLabel)
+        jsonObject.put("releaseDate", Album.releaseDate)
+        jsonObject.put("genre", Album.genre)
+        jsonObject.put("description", Album.description)
 
         networkServiceAdapter.createAlbum(
             jsonObject,

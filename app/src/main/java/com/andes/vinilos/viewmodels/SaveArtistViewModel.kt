@@ -5,7 +5,6 @@ import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
 import com.andes.vinilos.network.NetworkServiceAdapter
 import com.android.volley.VolleyError

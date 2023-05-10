@@ -8,8 +8,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.andes.vinilos.models.Album
-import com.andes.vinilos.models.NewAlbum
-import com.andes.vinilos.network.NetworkServiceAdapter
 import com.andes.vinilos.repositories.AlbumRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,10 +15,10 @@ import kotlinx.coroutines.withContext
 
 class AlbumsViewModel(application: Application) : AndroidViewModel(application) {
     // MutableLiveData to hold the list of albums retrieved from the repository
-    private val _albums = MutableLiveData<List<NewAlbum>>(listOf())
+    private val _albums = MutableLiveData<List<Album>>(listOf())
 
     // Comparator to sort the list of albums by name in ascending order
-    private val albumNameComparator = compareBy<NewAlbum> { it.name.lowercase() }
+    private val albumNameComparator = compareBy<Album> { it.name.lowercase() }
 
     // Repository to retrieve album data from the network
     private val albumsRepository = AlbumRepository(application)
@@ -32,7 +30,7 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
 
     // LiveData to expose the list of albums to the view
-    val albums: LiveData<List<NewAlbum>>
+    val albums: LiveData<List<Album>>
         get() = _albums
 
     // LiveData to expose the network error status to the view

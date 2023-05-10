@@ -9,11 +9,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.andes.vinilos.R
-import com.andes.vinilos.databinding.FragmentCreateAlbumBinding
 import com.andes.vinilos.databinding.FragmentCreateArtistBinding
-import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
-import com.andes.vinilos.viewmodels.SaveAlbumViewModel
 import com.andes.vinilos.viewmodels.SaveArtistViewModel
 import kotlinx.coroutines.launch
 
