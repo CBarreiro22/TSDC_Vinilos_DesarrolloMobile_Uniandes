@@ -45,7 +45,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         )
     }
 
-    fun createMusician(body: JSONObject, albumId: Int, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
+    fun createMusician(body: JSONObject, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
         requestQueue.add(
             postRequest(
                 "musicians",
