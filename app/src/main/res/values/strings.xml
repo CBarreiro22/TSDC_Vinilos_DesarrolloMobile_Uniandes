@@ -4,7 +4,8 @@
     <!--<string name="title_dashboard">Options</string>-->
     <string name="title_albums">Albums</string>
     <string name="album_name_placeholder"></string>
-    <string name="album_description_placeholder"></string>
+    <string name="album_description_placeholder"> </string>
+    <string name="album_description">Botón para guardar el álbum actual</string>
     <!-- CREATE ALBUM-->
     <string name="albumFecha">Fecha de lanzamiento</string>
     <string name="nombreAlbum">Nombre</string>
@@ -21,6 +22,7 @@
     <string name="seleccionGenero">Genero</string>
     <string name="seleccionEtiqueta">Etiqueta de grabacion</string>
     <string name="descripcionAlbum">Descripcion</string>
+    <string name="album_description_image"> </string>
     <string name="guardarAlbum">Guardar</string>
     <string name="cancelarAlbum">Cancelar</string>
 </resources>
