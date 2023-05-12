@@ -1,7 +1,11 @@
 package com.andes.vinilos.models
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "album")
 data class Album(
-    val id: Int,
+    @PrimaryKey val id: Int,
     val name: String,
     val cover: String,
     val releaseDate: String,
@@ -10,4 +14,4 @@ data class Album(
     val recordLabel: String,
 
 
-)
+    )

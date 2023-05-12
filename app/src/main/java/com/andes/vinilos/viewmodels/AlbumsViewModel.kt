@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.andes.vinilos.database.VinilosRoomDatabase
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.repositories.AlbumRepository
 import kotlinx.coroutines.Dispatchers
@@ -21,7 +22,7 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
     private val albumNameComparator = compareBy<Album> { it.name.lowercase() }
 
     // Repository to retrieve album data from the network
-    private val albumsRepository = AlbumRepository(application)
+    private val albumsRepository = AlbumRepository(application, VinilosRoomDatabase.getDatabase(application.applicationContext).albumsDao())
 
     // MutableLiveData to track network errors
     private var _eventNetworkError = MutableLiveData<Boolean>(false)

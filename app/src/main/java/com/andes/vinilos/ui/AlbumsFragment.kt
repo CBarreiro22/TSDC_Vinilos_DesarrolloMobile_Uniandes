@@ -8,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.andes.vinilos.R
 import com.andes.vinilos.databinding.FragmentAlbumsBinding
+import com.andes.vinilos.models.Album
 import com.andes.vinilos.ui.adapters.AlbumsAdapter
 import com.andes.vinilos.viewmodels.AlbumsViewModel
 
@@ -65,17 +67,18 @@ class AlbumsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // Set the title of the ActionBar to "Albums".
-        val activity = requireNotNull(requireActivity())
+        val activity = requireActivity()
         activity.actionBar?.title = "Albums"
         // Create an instance of the AlbumsViewModel using the Factory class and assign it
         // to the viewModel property.
-        viewModel = ViewModelProvider(this, AlbumsViewModel.Factory(activity.application))
-            .get(AlbumsViewModel::class.java)
+        viewModel = ViewModelProvider(this, AlbumsViewModel.Factory(activity.application))[AlbumsViewModel::class.java]
         // Observe the LiveData in the AlbumsViewModel and update the adapter's data
         // when it changes.
-        viewModel.albums.observe(viewLifecycleOwner) {
-            viewModelAdapter?.albums = it
-        }
+        viewModel.albums.observe(viewLifecycleOwner, Observer<List<Album>> {
+            it.apply {
+                viewModelAdapter!!.albums = this
+            }
+        })
         // Observe the eventNetworkError LiveData in the AlbumsViewModel and call the
         // onNetworkError() function when it is true.
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
