@@ -33,7 +33,11 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
 
     private val requestQueue: RequestQueue by lazy { Volley.newRequestQueue(context.applicationContext) }
 
-    fun createAlbum(body: JSONObject, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
+    fun createAlbum(
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(
             postRequest(
                 "albums",
@@ -44,7 +48,11 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         )
     }
 
-    fun createMusician(body: JSONObject, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
+    fun createMusician(
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(
             postRequest(
                 "musicians",
@@ -82,6 +90,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
             )
         )
     }
+
     suspend fun getMusician(): List<Musician> = suspendCoroutine { cont ->
         requestQueue.add(
             getRequest(
@@ -134,6 +143,60 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
             responseListener,
             errorListener
         )
+    }
+
+    fun getMusicians(
+        onComplete: (resp: List<Musician>) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        requestQueue.add(getRequest("musicians", { response ->
+            val resp = JSONArray(response)
+            val list = mutableListOf<Musician>()
+            for (i in 0 until resp.length()) {
+                val item = resp.getJSONObject(i)
+                val albumList = mutableListOf<Album>()
+                val albumsArray = item.getJSONArray("albums")
+                // Itera el arreglo de albums utilizando otro bucle for
+                for (j in 0 until albumsArray.length()) {
+                    val albumObject = albumsArray.getJSONObject(j)
+                    val albumId = albumObject.getInt("id")
+                    val albumName = albumObject.getString("name")
+                    val albumCover = albumObject.getString("cover")
+                    val releaseDate = albumObject.getString("releaseDate")
+                    val description = albumObject.getString("description")
+                    val genre = albumObject.getString("genre")
+                    val recordLabel = albumObject.getString("recordLabel")
+                    albumList.add(
+                        j,
+                        Album(
+                            name = albumName,
+                            cover = albumCover,
+                            releaseDate = releaseDate,
+                            description = description,
+                            genre = genre,
+                            recordLabel = recordLabel,
+                            id = albumId
+                        )
+                    )
+
+
+                    // Accede a las propiedades del álbum
+                }
+                list.add(
+                    i, Musician(
+                        id = item.getInt("id"),
+                        name = item.getString("name"),
+                        image = item.getString("image"),
+                        description = item.getString("description"),
+                        birthDate = item.getString("birthDate"), albums = albumList
+                    )
+                )
+            }
+            onComplete(list)
+        }, {
+            onError(it)
+
+        }))
     }
 }
 

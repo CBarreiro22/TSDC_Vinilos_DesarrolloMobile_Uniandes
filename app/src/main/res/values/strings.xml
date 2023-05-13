@@ -3,7 +3,7 @@
     <string name="title_artist">Artist</string>
     <!--<string name="title_dashboard">Options</string>-->
     <string name="title_albums">Albums</string>
-    <string name="album_name_placeholder"></string>
+    <string name="album_name_placeholder" />
     <string name="album_description_placeholder"> </string>
     <string name="album_description">Botón para guardar el álbum actual</string>
     <!-- CREATE ALBUM-->
@@ -28,4 +28,11 @@
     <string name="DescripcionArtista">Descripción</string>
     <string name="TituloCrearAlbum">CREAR ALBUM</string>
     <string name="TituloCrearArtista">CREAR ARTISTA</string>
+    <string name="nombreAlbumDetail">Nombre:</string>
+    <string name="fechaLanzamientoAlbumDetail">Fecha de lanzamiento:</string>
+    <string name="descripciónAlbumDetail">Descripción:</string>
+    <string name="generoAlbumDetail">Genero:</string>
+    <string name="recordLableAlbumDetail">Record label:</string>
+    <!-- Listado de artistas-->
+    <string name="crearArtista">Crear artista</string>
 </resources>

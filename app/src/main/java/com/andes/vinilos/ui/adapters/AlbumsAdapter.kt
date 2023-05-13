@@ -1,15 +1,19 @@
 package com.andes.vinilos.ui.adapters
 
+import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.andes.vinilos.R
 import com.andes.vinilos.databinding.AlbumItemBinding
 import com.andes.vinilos.models.Album
 import com.bumptech.glide.Glide
+import com.andes.vinilos.ui.AlbumsFragmentDirections
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
@@ -68,9 +72,20 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         }
         // bind the album data to the album item view
         holder.bind(albums[position])
-        // set a click listener for the album item view
-        holder.viewDataBinding.root.setOnClickListener {
 
+        // set a click listener for the album item vie
+        holder.viewDataBinding.root.setOnClickListener {
+            val album = albums[position]
+            Log.d("Almbum Detail Id:", album.id.toString())
+            val action = AlbumsFragmentDirections.actionNavigationAlbumsToAlbumDetailFragment()
+            action.albumId = album.id.toString()
+            action.cover = album.cover
+            action.name = album.name
+            action.description = album.description
+            action.genre = album.genre
+            action.recordLabel = album.recordLabel
+            action.releaseDate = album.releaseDate
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 }
