@@ -38,7 +38,7 @@ public class TestArtistCreate {
         onView(withId(R.id.navigation_artist)).perform(click());
         SystemClock.sleep(1500);
 
-        onView(withId(R.id.createArtist)).perform(click());
+        onView(withId(R.id.saveArtistFloatingButton)).perform(click());
         SystemClock.sleep(1500);
 
         onView(withId(R.id.artistName)).perform(typeText("Test Nombre Artista"));
