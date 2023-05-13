@@ -13,7 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class ArtistsViewModel(application: Application) : AndroidViewModel(application){
+class ArtistsViewModel(application: Application) : AndroidViewModel(application) {
 
     private val artistRepository = ArtistRepository(application)
 
@@ -38,16 +38,15 @@ class ArtistsViewModel(application: Application) : AndroidViewModel(application)
 
     private fun refreshDataFromNetwork() {
         try {
-            viewModelScope.launch (Dispatchers.Default){
-                withContext(Dispatchers.IO){
+            viewModelScope.launch(Dispatchers.Default) {
+                withContext(Dispatchers.IO) {
                     var data = artistRepository.refreshData()
                     _artists.postValue(data)
                 }
                 _eventNetworkError.postValue(false)
                 _isNetworkErrorShown.postValue(false)
             }
-        }
-        catch (e:Exception){
+        } catch (e: Exception) {
             _eventNetworkError.value = true
         }
     }
@@ -60,8 +59,7 @@ class ArtistsViewModel(application: Application) : AndroidViewModel(application)
     class Factory(val app: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ArtistsViewModel::class.java)) {
-                @Suppress("UNCHECKED_CAST")
-                return ArtistsViewModel(app) as T
+                @Suppress("UNCHECKED_CAST") return ArtistsViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

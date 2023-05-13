@@ -24,26 +24,18 @@ class SaveArtistViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     private val networkServiceAdapter = NetworkServiceAdapter.getInstance(application)
-
     fun saveArtist(artist: Musician, onSuccess: () -> Unit, onError: () -> Unit) {
         val jsonObject = JSONObject()
-       /* jsonObject.put("name", album.name)
-        jsonObject.put("cover", album.cover)
-        jsonObject.put("recordLabel", album.recordLabel)
-        jsonObject.put("releaseDate", album.releaseDate)
-        jsonObject.put("genre", album.genre)
-        jsonObject.put("description", album.description)*/
-
-        networkServiceAdapter.createAlbum(
-            jsonObject,
-            onComplete = { response ->
-                Log.d("SaveAlbumViewModel", "Artist created successfully")
-                onSuccess()
-            },
-            onError = { error: VolleyError ->
-                Log.d("SaveAlbumViewModel", "Error creating artist: $error")
-                onError()
-            }
-        )
+        jsonObject.put("name", artist.name)
+        jsonObject.put("image", artist.image)
+        jsonObject.put("description", artist.description)
+        jsonObject.put("birthDate", artist.birthDate)
+        networkServiceAdapter.createMusician(jsonObject, { response ->
+            Log.d("SaveArtistViewModel", "Artist created successfully")
+            onSuccess()
+        }, { error: VolleyError ->
+            Log.d("SaveArtistViewModel", "Error creating artist: $error")
+            onError()
+        })
     }
 }

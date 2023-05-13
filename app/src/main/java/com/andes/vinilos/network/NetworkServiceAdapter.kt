@@ -83,6 +83,29 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         )
     }
     suspend fun getMusician(): List<Musician> = suspendCoroutine { cont ->
+        requestQueue.add(
+            getRequest(
+                "musicians",
+                Response.Listener<String> { response ->
+                    val resp = JSONArray(response)
+                    val list = mutableListOf<Musician>()
+                    for (i in 0 until resp.length()) {
+                        val item = resp.getJSONObject(i)
+                        list.add(
+                            i, Musician(
+                                id = item.getInt("id"),
+                                name = item.getString("name"),
+                                image = item.getString("image"),
+                                description = item.getString("description"),
+                                birthDate = item.getString("birthDate"),
+                            )
+                        )
+                    }
+                    cont.resume(list)
+                },
+                Response.ErrorListener { error -> cont.resumeWithException(error) }
+            )
+        )
     }
 
     private fun getRequest(

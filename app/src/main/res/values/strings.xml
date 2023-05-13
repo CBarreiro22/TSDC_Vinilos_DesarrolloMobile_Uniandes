@@ -25,4 +25,7 @@
     <string name="album_description_image"> </string>
     <string name="guardarAlbum">Guardar</string>
     <string name="cancelarAlbum">Cancelar</string>
+    <string name="DescripcionArtista">Descripción</string>
+    <string name="TituloCrearAlbum">CREAR ALBUM</string>
+    <string name="TituloCrearArtista">CREAR ARTISTA</string>
 </resources>
