@@ -1,21 +1,17 @@
 package com.andes.vinilos.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.andes.vinilos.R
-import com.andes.vinilos.databinding.FragmentAlbumsBinding
 import com.andes.vinilos.databinding.FragmentArtistBinding
-import com.andes.vinilos.ui.adapters.AlbumsAdapter
 import com.andes.vinilos.ui.adapters.ArtistAdapter
-import com.andes.vinilos.viewmodels.AlbumsViewModel
 import com.andes.vinilos.viewmodels.ArtistsViewModel
 
 class ArtistFragment : Fragment() {
@@ -29,6 +25,7 @@ class ArtistFragment : Fragment() {
     private lateinit var viewModel: ArtistsViewModel
     private var viewModelAdapter: ArtistAdapter? = null
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -37,14 +34,14 @@ class ArtistFragment : Fragment() {
         _binding = FragmentArtistBinding.inflate(inflater, container, false)
         // Create an instance of the AlbumsAdapter and assign it to the viewModelAdapter property
         viewModelAdapter = ArtistAdapter()
-
+        Log.i("Artist.Fragment.create","entre")
         // Set up a click listener for the saveAlbumFloatingButton. When clicked, it will
         // navigate to the SaveAlbumFragment.
-        binding.saveArtistFloatingButton.setOnClickListener {
-            findNavController().navigate(R.id.action_navigation_albums_to_saveAlbumFragment)
-        }
+
+
         return binding?.root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
@@ -58,27 +55,37 @@ class ArtistFragment : Fragment() {
         // Set up the layout manager and adapter for the RecyclerView.
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
+        Log.i("Artist.Fragment.created","entre")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         // Set the title of the ActionBar to "Albums".
         val activity = requireNotNull(requireActivity())
-        activity.actionBar?.title = "Albums"
+        activity.actionBar?.title = "Artists"
+        Log.i("AonActivityCreated","geting factory")
         // Create an instance of the AlbumsViewModel using the Factory class and assign it
         // to the viewModel property.
         viewModel = ViewModelProvider(this, ArtistsViewModel.Factory(activity.application))
             .get(ArtistsViewModel::class.java)
         // Observe the LiveData in the AlbumsViewModel and update the adapter's data
         // when it changes.
-        viewModel.albums.observe(viewLifecycleOwner) {
-            viewModelAdapter?.artist = it
+        viewModel.artists.observe(viewLifecycleOwner) {
+            viewModelAdapter?.artists = it
         }
         // Observe the eventNetworkError LiveData in the AlbumsViewModel and call the
         // onNetworkError() function when it is true.
-        /*
+
         viewModel.eventNetworkError.observe(viewLifecycleOwner) { isNetworkError ->
             if (isNetworkError) onNetworkError()
-        }*/
+        }
+
+    }
+
+    private fun onNetworkError() {
+        if (viewModel.isNetworkErrorShown.value != true) {
+            Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
+            viewModel.onNetworkErrorShown()
+        }
     }
 }

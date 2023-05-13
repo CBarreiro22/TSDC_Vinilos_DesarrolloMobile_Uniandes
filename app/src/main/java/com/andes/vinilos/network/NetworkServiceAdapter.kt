@@ -1,34 +1,86 @@
 package com.andes.vinilos.network
 
 import android.content.Context
-import android.util.Log
+import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
-import com.andes.vinilos.models.NewAlbum
-import com.android.volley.DefaultRetryPolicy
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
-import com.android.volley.RetryPolicy
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.Volley
-import org.json.JSONObject
 import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import org.json.JSONArray
+import org.json.JSONObject
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
-class NetworkServiceAdapter constructor(context: Context) {
+class NetworkServiceAdapter private constructor(private val context: Context) {
+
     companion object {
-        const val BASE_URL = "https://appvinilos2023.herokuapp.com/"
-        var instance: NetworkServiceAdapter? = null
-        fun getInstance(context: Context) = instance ?: synchronized(this) {
-            instance ?: NetworkServiceAdapter(context).also {
-                instance = it
+        private const val BASE_URL = "https://appvinilos2023.herokuapp.com/"
+
+        @Volatile
+        private var instance: NetworkServiceAdapter? = null
+
+        fun getInstance(context: Context): NetworkServiceAdapter {
+            return instance ?: synchronized(this) {
+                instance ?: NetworkServiceAdapter(context).also { instance = it }
             }
         }
     }
 
-    private val requestQueue: RequestQueue by lazy {
-        Volley.newRequestQueue(context.applicationContext)
+    private val requestQueue: RequestQueue by lazy { Volley.newRequestQueue(context.applicationContext) }
+
+    fun createAlbum(body: JSONObject, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
+        requestQueue.add(
+            postRequest(
+                "albums",
+                body,
+                Response.Listener<JSONObject> { response -> onComplete(response) },
+                Response.ErrorListener { error -> onError(error) }
+            )
+        )
+    }
+
+    fun createMusician(body: JSONObject, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
+        requestQueue.add(
+            postRequest(
+                "musicians",
+                body,
+                Response.Listener<JSONObject> { response -> onComplete(response) },
+                Response.ErrorListener { error -> onError(error) }
+            )
+        )
+    }
+
+    suspend fun getAlbums(): List<Album> = suspendCoroutine { cont ->
+        requestQueue.add(
+            getRequest(
+                "albums",
+                Response.Listener<String> { response ->
+                    val resp = JSONArray(response)
+                    val list = mutableListOf<Album>()
+                    for (i in 0 until resp.length()) {
+                        val item = resp.getJSONObject(i)
+                        list.add(
+                            i, Album(
+                                id = item.getInt("id"),
+                                name = item.getString("name"),
+                                cover = item.getString("cover"),
+                                recordLabel = item.getString("recordLabel"),
+                                releaseDate = item.getString("releaseDate"),
+                                genre = item.getString("genre"),
+                                description = item.getString("description")
+                            )
+                        )
+                    }
+                    cont.resume(list)
+                },
+                Response.ErrorListener { error -> cont.resumeWithException(error) }
+            )
+        )
     }
 
     private fun getRequest(
@@ -36,99 +88,27 @@ class NetworkServiceAdapter constructor(context: Context) {
         responseListener: Response.Listener<String>,
         errorListener: Response.ErrorListener
     ): StringRequest {
-        return StringRequest(Request.Method.GET, BASE_URL + path, responseListener, errorListener)
-    }
-
-    fun createAlbum(
-        body: JSONObject,
-        onComplete: (resp: JSONObject) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        Log.d("create album", "body$body")
-        requestQueue.add(
-            postRequest(
-                "albums", body,
-                { response ->
-                    onComplete(response)
-                },
-                {
-                    onError(it)
-                }, null
-            )
+        return StringRequest(
+            Request.Method.GET,
+            BASE_URL + path,
+            responseListener,
+            errorListener
         )
-
     }
 
     private fun postRequest(
         path: String,
         body: JSONObject,
         responseListener: Response.Listener<JSONObject>,
-        errorListener: Response.ErrorListener,
-        headers: HashMap<String, String>? = null
+        errorListener: Response.ErrorListener
     ): JsonObjectRequest {
-        return object : JsonObjectRequest(
-            Method.POST,
+        return JsonObjectRequest(
+            Request.Method.POST,
             BASE_URL + path,
             body,
             responseListener,
             errorListener
-        ) {
-            override fun getHeaders(): Map<String, String> {
-                Log.d("networkservice adapter", "adding headers")
-                val headersMap = HashMap<String, String>()
-                headersMap["Content-Type"] = "application/json"
-                headersMap["Accept"] = "*/*"
-                headersMap["Accept-Encoding"] = "gzip, deflate, br"
-                headers?.let { headersMap.putAll(it) }
-                return headersMap
-            }
-
-            override fun getRetryPolicy(): RetryPolicy {
-                return DefaultRetryPolicy(
-                    5000,  // 5 seconds timeout
-                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
-                )
-            }
-
-            fun onErrorResponse(error: VolleyError?) {
-
-                Log.e(
-                    "NetworkServiceAdapter",
-                    "Error al hacer la petición: ${error?.networkResponse?.statusCode} ${
-                        error?.networkResponse?.data?.toString(Charsets.UTF_8)
-                    }"
-                )
-            }
-        }
-    }
-
-
-    fun getAlbums(
-        onComplete: (resp: List<NewAlbum>) -> Unit,
-        onError: (error: VolleyError) -> Unit
-    ) {
-        requestQueue.add(getRequest("albums", { response ->
-            val resp = JSONArray(response)
-            val list = mutableListOf<NewAlbum>()
-            for (i in 0 until resp.length()) {
-                val item = resp.getJSONObject(i)
-                list.add(
-                    i, NewAlbum(
-                        id = item.getInt("id"),
-                        name = item.getString("name"),
-                        cover = item.getString("cover"),
-                        recordLabel = item.getString("recordLabel"),
-                        releaseDate = item.getString("releaseDate"),
-                        genre = item.getString("genre"),
-                        description = item.getString("description")
-                    )
-                )
-            }
-            onComplete(list)
-        }, {
-            onError(it)
-        }))
+        )
     }
 
     fun getMusicians(
@@ -140,7 +120,7 @@ class NetworkServiceAdapter constructor(context: Context) {
             val list = mutableListOf<Musician>()
             for (i in 0 until resp.length()) {
                 val item = resp.getJSONObject(i)
-                val albumList = mutableListOf<NewAlbum>()
+                val albumList = mutableListOf<Album>()
                 val albumsArray = item.getJSONArray("albums")
                 // Itera el arreglo de albums utilizando otro bucle for
                 for (j in 0 until albumsArray.length()) {
@@ -154,7 +134,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     val recordLabel = albumObject.getString("recordLabel")
                     albumList.add(
                         j,
-                        NewAlbum(
+                        Album(
                             name = albumName,
                             cover = albumCover,
                             releaseDate = releaseDate,
@@ -185,3 +165,4 @@ class NetworkServiceAdapter constructor(context: Context) {
         }))
     }
 }
+
