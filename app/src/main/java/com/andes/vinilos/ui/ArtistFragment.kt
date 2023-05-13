@@ -14,7 +14,7 @@ import com.andes.vinilos.databinding.FragmentArtistBinding
 import com.andes.vinilos.ui.adapters.ArtistAdapter
 import com.andes.vinilos.viewmodels.ArtistsViewModel
 
-class r : Fragment() {
+class ArtistFragment : Fragment() {
 
     private var _binding: FragmentArtistBinding? = null
 
