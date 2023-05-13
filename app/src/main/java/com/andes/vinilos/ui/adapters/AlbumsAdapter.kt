@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.andes.vinilos.R
 import com.andes.vinilos.databinding.AlbumItemBinding
-import com.andes.vinilos.models.NewAlbum
+import com.andes.vinilos.models.Album
 import com.bumptech.glide.Glide
 import com.andes.vinilos.ui.AlbumsFragmentDirections
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -29,7 +29,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
         }
 
         // bind the album data to the album item view using Glide for image loading
-        fun bind(album: NewAlbum) {
+        fun bind(album: Album) {
             Glide.with(itemView)
                 .load(album.cover.toUri().buildUpon().scheme("https").build())
                 .apply(
@@ -42,7 +42,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
     }
 
     // list of albums to display
-    var albums: List<NewAlbum> = emptyList()
+    var albums: List<Album> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()

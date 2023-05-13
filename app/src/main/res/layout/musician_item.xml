@@ -5,8 +5,8 @@
 
     <data>
         <variable
-            name="album"
-            type="com.andes.vinilos.models.Album" />
+            name="artist"
+            type="com.andes.vinilos.models.Musician" />
     </data>
 
 
@@ -14,30 +14,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
-        android:padding="8dp"
-        app:layout_constraintTop_toTopOf="parent">
+        android:padding="8dp">
 
         <ScrollView
             android:id="@+id/scrollAlbum"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/cover"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:contentDescription="@string/album_description_image"
-                />
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -49,18 +46,18 @@
                     android:layout_marginBottom="3dp">
 
                     <TextView
-                        android:id="@+id/albumName"
+                        android:id="@+id/musicianName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{album.name}"
+                        android:text="@{artist.name}"
                         android:textStyle="bold"
-                        tools:text="Album name" />
+                        tools:text="Musician name" />
 
                     <TextView
-                        android:id="@+id/albumGenre"
+                        android:id="@+id/albumDescription"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{album.genre}"
+                        android:text="@{artist.description}"
                         android:paddingTop="2dp"
                         tools:text="Genre" />
                 </LinearLayout>

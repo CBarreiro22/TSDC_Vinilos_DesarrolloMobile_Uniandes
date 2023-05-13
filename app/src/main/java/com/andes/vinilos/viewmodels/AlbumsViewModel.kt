@@ -6,20 +6,23 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
+import com.andes.vinilos.database.VinilosRoomDatabase
 import com.andes.vinilos.models.Album
-import com.andes.vinilos.models.NewAlbum
-import com.andes.vinilos.network.NetworkServiceAdapter
 import com.andes.vinilos.repositories.AlbumRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class AlbumsViewModel(application: Application) : AndroidViewModel(application) {
     // MutableLiveData to hold the list of albums retrieved from the repository
-    private val _albums = MutableLiveData<List<NewAlbum>>(listOf())
+    private val _albums = MutableLiveData<List<Album>>(listOf())
 
     // Comparator to sort the list of albums by name in ascending order
-    private val albumNameComparator = compareBy<NewAlbum> { it.name.lowercase() }
+    private val albumNameComparator = compareBy<Album> { it.name.lowercase() }
 
     // Repository to retrieve album data from the network
-    private val albumsRepository = AlbumRepository(application)
+    private val albumsRepository = AlbumRepository(application, VinilosRoomDatabase.getDatabase(application.applicationContext).albumsDao())
 
     // MutableLiveData to track network errors
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -28,7 +31,7 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
 
     // LiveData to expose the list of albums to the view
-    val albums: LiveData<List<NewAlbum>>
+    val albums: LiveData<List<Album>>
         get() = _albums
 
     // LiveData to expose the network error status to the view
@@ -46,17 +49,19 @@ class AlbumsViewModel(application: Application) : AndroidViewModel(application) 
 
     // Refresh album data from the network
     private fun refreshDataFromNetwork() {
-        albumsRepository.refreshData({
-            // Sort the list of albums by name in ascending order and update the MutableLiveData
-            _albums.postValue(it.sortedWith(albumNameComparator))
-
-            // Set the network error and isNetworkErrorShown LiveData to false
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        }, {
-            // Set the network error LiveData to true if an error occurred while refreshing data
+        try {
+            viewModelScope.launch (Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = albumsRepository.refreshData().sortedWith(albumNameComparator)
+                    _albums.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){
             _eventNetworkError.value = true
-        })
+        }
     }
 
     // Call this function to indicate that the network error has been shown to the user

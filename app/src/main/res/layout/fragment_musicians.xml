@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.AlbumsFragment"
+<FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
     android:layout_marginStart="16dp"
     android:layout_marginEnd="16dp">
 
@@ -17,16 +17,16 @@
         android:id="@+id/albumsRv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/album_item" />
+        tools:listitem="@layout/musician_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/saveAlbumFloatingButton"
+        android:id="@+id/saveArtistFloatingButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginBottom="20dp"
         android:layout_marginEnd="10dp"
-        android:src="@android:drawable/ic_input_add"
-        android:contentDescription="@string/album_description"/>
+        android:layout_marginBottom="20dp"
+        android:contentDescription="@string/crearArtista"
+        android:src="@android:drawable/ic_input_add" />
 
 </FrameLayout>

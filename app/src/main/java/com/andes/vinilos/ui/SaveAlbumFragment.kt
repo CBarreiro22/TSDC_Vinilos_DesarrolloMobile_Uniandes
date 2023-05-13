@@ -54,72 +54,59 @@ class SaveAlbumFragment : Fragment() {
             onDatePickerButtonClick(it)
         }
 
-        saveAlbumButton.setOnClickListener{
-            // Catch value objects
-            var albumNameElement: EditText = binding.nombreAlbum
-            var albumNameWritten = albumNameElement.text.toString()
+        saveAlbumButton.setOnClickListener {
+            // Obtener los valores ingresados por el usuario
+            val albumName = binding.nombreAlbum.text.toString().trim()
+            val albumCover = binding.cover.text.toString().trim()
+            val albumDescription = binding.descripcionAlbum.text.toString().trim()
+            val albumGenre = binding.albumGeneros.selectedItem.toString()
+            val albumRecordLabel = binding.etiquetasGrabaciones.selectedItem.toString()
 
-            var albumCoverElement: EditText = binding.cover
-            var albumCoverWritten = albumCoverElement.text.toString()
-
-            var albumGenresElement: Spinner = binding.albumGeneros
-            var albumGenreSelected = albumGenresElement.selectedItem.toString()
-
-            var albumRecordLabelElement: Spinner = binding.etiquetasGrabaciones
-            var albumRecordLabelSelected = albumRecordLabelElement.selectedItem.toString()
-
-            var albumDescriptionElement: EditText = binding.descripcionAlbum
-            var albumDescriptionWritten = albumDescriptionElement.text.toString()
-
-            var button: Button = binding.datePickerButton
-
-            if(albumNameWritten.isEmpty()){
-                albumNameElement.error = "El campo nombre es obligatorio"
-                return@setOnClickListener
-            }
-            if(albumCoverWritten.isEmpty()){
-                albumCoverElement.error = "El campo cover es obligatorio"
-                return@setOnClickListener
-            }
-
-            if (albumNameWritten.length < 5 || albumNameWritten.length > 50) {
-                albumNameElement.error = "El campo nombre debe tener entre 5 y 50 caracteres"
-                return@setOnClickListener
-            }
-
-            if(albumDescriptionWritten.isEmpty()){
-                albumDescriptionElement.error = "El campo descripcion es obligatorio"
-                return@setOnClickListener
-            }
-
-            if (albumDescriptionWritten.length < 5 || albumDescriptionWritten.length > 50) {
-                albumDescriptionElement.error = "La descripción debe tener entre 5 y 50 caracteres"
-                return@setOnClickListener
-            }
-
-            if(albumDescriptionWritten.isEmpty()){
-                albumDescriptionElement.error = "El campo descripcion es obligatorio"
-                return@setOnClickListener
-            }
-
+            // Verificar que se haya seleccionado una fecha
             if (!dateSelected) {
-                button.error = "Campo fecha obligatorio"
+                binding.datePickerButton.error = "Campo fecha obligatorio"
                 return@setOnClickListener
             } else {
-                button.error = null
+                binding.datePickerButton.error = null
+            }
+
+            // Verificar que los campos obligatorios no estén vacíos
+            if (albumName.isEmpty()) {
+                binding.nombreAlbum.error = "El campo nombre es obligatorio"
+                return@setOnClickListener
+            }
+            if (albumCover.isEmpty()) {
+                binding.cover.error = "El campo cover es obligatorio"
+                return@setOnClickListener
+            }
+            if (albumDescription.isEmpty()) {
+                binding.descripcionAlbum.error = "El campo descripción es obligatorio"
+                return@setOnClickListener
+            }
+
+            // Verificar que los campos de texto tengan la longitud adecuada
+            if (albumName.length < 5 || albumName.length > 50) {
+                binding.nombreAlbum.error = "El campo nombre debe tener entre 5 y 50 caracteres"
+                return@setOnClickListener
+            }
+            if (albumDescription.length < 5 || albumDescription.length > 50) {
+                binding.descripcionAlbum.error = "El campo descripción debe tener entre 5 y 50 caracteres"
+                return@setOnClickListener
             }
 
             val albumDateFormat = SimpleDateFormat("yyyy-MM-dd")
             val albumDate = albumDateFormat.format(selectedDate.time)
-
+            // Crear un objeto Album a partir de los valores ingresados
             val album = Album(
-                albumNameWritten,
-                albumCoverWritten,
-                albumDate,
-                albumDescriptionWritten,
-                albumGenreSelected,
-                albumRecordLabelSelected
+                id = 0, // Esto se asignará automáticamente en la base de datos
+                name = albumName,
+                cover = albumCover,
+                releaseDate = albumDate,
+                description = albumDescription,
+                genre = albumGenre,
+                recordLabel = albumRecordLabel
             )
+
             saveAlbum(album)
 
         }
@@ -151,9 +138,9 @@ class SaveAlbumFragment : Fragment() {
         }
     }
 
-    private fun saveAlbum(album: Album) {
+    private fun saveAlbum(Album: Album) {
         lifecycleScope.launch {
-            saveAlbumViewModel.saveAlbum(album,
+            saveAlbumViewModel.saveAlbum(Album,
                 onSuccess = {
                     val toast = Toast.makeText(requireContext(), "Se ha creado el album exitosamente", Toast.LENGTH_LONG)
                     toast.show()
