@@ -19,7 +19,6 @@ class AlbumDetailFragment : Fragment() {
     private var _binding: FragmentAlbumDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: AlbumDetailViewModel
-    private var viewModelAdapter: AlbumDetailAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
