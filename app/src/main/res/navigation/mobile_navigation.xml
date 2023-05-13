@@ -9,7 +9,11 @@
         android:id="@+id/navigation_artist"
         android:name="com.andes.vinilos.ui.ArtistFragment"
         android:label="@string/title_artist"
-        tools:layout="@layout/fragment_artist" />
+        tools:layout="@layout/fragment_artist" >
+        <action
+            android:id="@+id/action_navigation_artist_to_saveArtistFragment"
+            app:destination="@id/saveArtistFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_options"
@@ -18,6 +22,9 @@
         <action
             android:id="@+id/action_navigation_options_to_saveAlbumFragment"
             app:destination="@id/saveAlbumFragment" />
+        <action
+            android:id="@+id/action_navigation_options_to_saveArtistFragment"
+            app:destination="@id/saveArtistFragment" />
     </fragment>
 
     <fragment
@@ -88,5 +95,14 @@
             app:argType="string"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/saveArtistFragment"
+        android:name="com.andes.vinilos.ui.SaveArtistFragment"
+        android:label="fragment_create_artist"
+        tools:layout="@layout/fragment_create_artist" >
+        <action
+            android:id="@+id/action_saveArtistFragment_to_navigation_artist"
+            app:destination="@id/navigation_artist" />
     </fragment>
 </navigation>

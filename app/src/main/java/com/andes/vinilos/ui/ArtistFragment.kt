@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.andes.vinilos.databinding.FragmentArtistBinding
 import com.andes.vinilos.ui.adapters.ArtistAdapter
 import com.andes.vinilos.viewmodels.ArtistsViewModel
+import androidx.navigation.fragment.findNavController
+import com.andes.vinilos.R
 
 class ArtistFragment : Fragment() {
 
@@ -37,8 +39,9 @@ class ArtistFragment : Fragment() {
         Log.i("Artist.Fragment.create","entre")
         // Set up a click listener for the saveAlbumFloatingButton. When clicked, it will
         // navigate to the SaveAlbumFragment.
-
-
+        binding.saveArtistFloatingButton.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_artist_to_saveArtistFragment)
+        }
         return binding.root
     }
 

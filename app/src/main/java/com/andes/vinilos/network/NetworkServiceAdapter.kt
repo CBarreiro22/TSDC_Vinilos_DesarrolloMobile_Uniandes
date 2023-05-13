@@ -33,7 +33,11 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
 
     private val requestQueue: RequestQueue by lazy { Volley.newRequestQueue(context.applicationContext) }
 
-    fun createAlbum(body: JSONObject, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
+    fun createAlbum(
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(
             postRequest(
                 "albums",
@@ -44,7 +48,11 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         )
     }
 
-    fun createMusician(body: JSONObject, onComplete: (resp: JSONObject) -> Unit, onError: (error: VolleyError) -> Unit) {
+    fun createMusician(
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(
             postRequest(
                 "musicians",
@@ -73,6 +81,32 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
                                 releaseDate = item.getString("releaseDate"),
                                 genre = item.getString("genre"),
                                 description = item.getString("description")
+                            )
+                        )
+                    }
+                    cont.resume(list)
+                },
+                Response.ErrorListener { error -> cont.resumeWithException(error) }
+            )
+        )
+    }
+
+    suspend fun getMusician(): List<Musician> = suspendCoroutine { cont ->
+        requestQueue.add(
+            getRequest(
+                "musicians",
+                Response.Listener<String> { response ->
+                    val resp = JSONArray(response)
+                    val list = mutableListOf<Musician>()
+                    for (i in 0 until resp.length()) {
+                        val item = resp.getJSONObject(i)
+                        list.add(
+                            i, Musician(
+                                id = item.getInt("id"),
+                                name = item.getString("name"),
+                                image = item.getString("image"),
+                                description = item.getString("description"),
+                                birthDate = item.getString("birthDate"),
                             )
                         )
                     }
