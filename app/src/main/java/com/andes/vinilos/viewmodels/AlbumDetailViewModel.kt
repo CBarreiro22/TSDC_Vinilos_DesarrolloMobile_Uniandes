@@ -6,18 +6,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.andes.vinilos.models.NewAlbum
+import com.andes.vinilos.models.Album
 
 class AlbumDetailViewModel(application: Application) : AndroidViewModel(application){
 
-    private val _albumMutableData = MutableLiveData<NewAlbum>()
+    private val _albumMutableData = MutableLiveData<Album>()
 
     // LiveData to expose the list of albums to the view
-    val album: LiveData<NewAlbum>
+    val album: LiveData<Album>
         get() = _albumMutableData
 
     // Refresh album data from the network
-    fun refreshData(currentAlbum: NewAlbum) {
+    fun refreshData(currentAlbum: Album) {
         _albumMutableData.postValue(currentAlbum)
     }
 

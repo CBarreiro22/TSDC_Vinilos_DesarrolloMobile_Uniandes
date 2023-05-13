@@ -1,19 +1,14 @@
 package com.andes.vinilos.ui.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.core.net.toUri
-import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import com.andes.vinilos.R
 import com.andes.vinilos.databinding.AlbumItemBinding
 import com.andes.vinilos.models.Album
-import com.andes.vinilos.models.NewAlbum
 import com.bumptech.glide.Glide
-import com.andes.vinilos.ui.AlbumsFragment
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 
@@ -29,7 +24,7 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
         }
 
         // bind the album data to the album item view using Glide for image loading
-        fun bind(album: NewAlbum) {
+        fun bind(album: Album) {
             Glide.with(itemView)
                 .load(album.cover.toUri().buildUpon().scheme("https").build())
                 .apply(
@@ -41,7 +36,7 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
         }
     }
 
-    var album: NewAlbum? = null
+    var album: Album? = null
         set(value) {
             field = value
             notifyDataSetChanged()

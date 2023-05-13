@@ -8,11 +8,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.andes.vinilos.R
 import com.andes.vinilos.databinding.FragmentAlbumDetailBinding
-import com.andes.vinilos.models.NewAlbum
+import com.andes.vinilos.models.Album
 import com.andes.vinilos.ui.adapters.AlbumDetailAdapter
 import com.andes.vinilos.viewmodels.AlbumDetailViewModel
 import com.bumptech.glide.Glide
@@ -51,9 +48,9 @@ class AlbumDetailFragment : Fragment() {
         } else {
             val arguments = AlbumDetailFragmentArgs.fromBundle(bundle)
             val currentAlbum = arguments.albumId?.let {
-                NewAlbum(arguments.name.toString(),arguments.cover.toString(),
+                Album(it.toInt(), arguments.name.toString(),arguments.cover.toString(),
                     arguments.releaseDate.toString(),arguments.description.toString(),
-                    arguments.genre.toString(), arguments.recordLabel.toString(), it.toInt())
+                    arguments.genre.toString(), arguments.recordLabel.toString())
             }
             if (currentAlbum != null) {
                 viewModel.refreshData(currentAlbum)
