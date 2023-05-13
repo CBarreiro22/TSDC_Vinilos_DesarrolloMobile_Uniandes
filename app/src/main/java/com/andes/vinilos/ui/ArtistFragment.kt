@@ -14,7 +14,7 @@ import com.andes.vinilos.databinding.FragmentArtistBinding
 import com.andes.vinilos.ui.adapters.ArtistAdapter
 import com.andes.vinilos.viewmodels.ArtistsViewModel
 
-class ArtistFragment : Fragment() {
+class r : Fragment() {
 
     private var _binding: FragmentArtistBinding? = null
 
@@ -39,7 +39,7 @@ class ArtistFragment : Fragment() {
         // navigate to the SaveAlbumFragment.
 
 
-        return binding?.root
+        return binding.root
     }
 
 
@@ -51,7 +51,7 @@ class ArtistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         // Get a reference to the RecyclerView from the binding and assign it to the
         // recyclerView property.
-        recyclerView = binding?.artistRv ?: return
+        recyclerView = binding.artistRv
         // Set up the layout manager and adapter for the RecyclerView.
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter

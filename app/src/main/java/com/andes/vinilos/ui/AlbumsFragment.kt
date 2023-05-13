@@ -51,14 +51,14 @@ class AlbumsFragment : Fragment() {
         binding.saveAlbumFloatingButton.setOnClickListener {
             findNavController().navigate(R.id.action_navigation_albums_to_saveAlbumFragment)
         }
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         // Get a reference to the RecyclerView from the binding and assign it to the
         // recyclerView property.
-        recyclerView = binding?.albumsRv ?: return
+        recyclerView = binding.albumsRv
         // Set up the layout manager and adapter for the RecyclerView.
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
