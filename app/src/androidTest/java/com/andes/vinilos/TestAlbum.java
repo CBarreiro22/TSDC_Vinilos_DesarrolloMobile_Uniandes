@@ -65,6 +65,27 @@ public class TestAlbum {
         ViewInteraction cover = onView(withId(R.id.cover));
     }
 
+    @Test
+    public void albumDetailTest() {
+        onView(withId(R.id.navigation_albums)).perform(click());
+        SystemClock.sleep(1500);
+        ViewInteraction menu = onView(withId(R.id.albumsRv)).perform(click());
+        menu.perform(click());
+        menu.perform(click());
+        menu.perform(click());
+        menu.perform(click());
+        SystemClock.sleep(1500);
+        /*
+
+
+        ViewInteraction genero = onView(allOf(withText("Género")));
+        //validar Nombre de un album
+        ViewInteraction album = onView(withId(R.id.albumName));
+        //validar Nombre de genero
+        ViewInteraction generoName = onView(withId(R.id.albumGenre));
+        ViewInteraction cover = onView(withId(R.id.cover));*/
+    }
+
     public static Matcher<View> withIndex(final Matcher<View> matcher, final int index) {
         return new TypeSafeMatcher<View>() {
             int currentIndex = 0;
