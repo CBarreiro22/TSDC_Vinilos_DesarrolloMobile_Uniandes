@@ -28,6 +28,16 @@
         <action
             android:id="@+id/action_navigation_albums_to_saveAlbumFragment"
             app:destination="@id/saveAlbumFragment" />
+        <action
+            android:id="@+id/action_navigation_albums_to_albumDetailFragment"
+            app:destination="@id/albumDetailFragment" >
+            <argument
+                android:name="albumId"
+                app:argType="string"
+                app:nullable="true"
+                android:defaultValue="@null" />
+        </action>
+
     </fragment>
     <fragment
         android:id="@+id/saveAlbumFragment"
@@ -37,5 +47,46 @@
         <action
             android:id="@+id/action_saveAlbumFragment_to_navigation_albums"
             app:destination="@id/navigation_albums" />
+    </fragment>
+    <fragment
+        android:id="@+id/albumDetailFragment"
+        android:name="com.andes.vinilos.ui.AlbumDetailFragment"
+        android:label="AlbumDetailFragment"
+        tools:layout="@layout/fragment_album_detail">
+        <argument
+            android:name="albumId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="cover"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="genre"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="recordLabel"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="releaseDate"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
