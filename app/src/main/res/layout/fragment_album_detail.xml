@@ -16,29 +16,233 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="100dp">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingTop="70dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:orientation="horizontal"
+                        android:padding="5dp">
+
+                        <ImageView
+                            android:id="@+id/imageDetailAlbum"
+                            android:layout_width="132dp"
+                            android:layout_height="180dp"
+                            app:srcCompat="@drawable/album_de_musica" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:padding="0dp">
+
+                            <TextView
+                                android:id="@+id/textViewNameLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@string/nombreAlbumDetail"
+                                android:textStyle="bold|italic"
+                                tools:text="@string/nombreAlbumDetail" />
+
+                            <TextView
+                                android:id="@+id/textViewName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@{album.name}"
+                                tools:text="Nombre" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:padding="0dp">
+
+                            <TextView
+                                android:id="@+id/textViewReleaseDateLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@string/fechaLanzamientoAlbumDetail"
+                                android:textStyle="bold|italic"
+                                tools:text="@string/fechaLanzamientoAlbumDetail" />
+
+                            <TextView
+                                android:id="@+id/textViewReleaseDate"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@{album.releaseDate}"
+                                tools:text="@string/fechaLanzamientoAlbumDetail" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5"
+                            android:orientation="horizontal"
+                            android:padding="0dp">
+
+                            <TextView
+                                android:id="@+id/textViewDescriptionLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@string/descripciónAlbumDetail"
+                                android:textStyle="bold|italic"
+                                tools:text="@string/descripciónAlbumDetail" />
+
+                            <TextView
+                                android:id="@+id/textViewDescription"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@{album.description}"
+                                tools:text="@string/descripciónAlbumDetail" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5"
+                            android:orientation="horizontal"
+                            android:padding="0dp">
+
+                            <TextView
+                                android:id="@+id/textViewGenreLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@string/generoAlbumDetail"
+                                android:textStyle="bold|italic"
+                                tools:text="@string/generoAlbumDetail" />
+
+                            <TextView
+                                android:id="@+id/textViewGenre"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@{album.genre}"
+                                tools:text="@string/generoAlbumDetail" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5"
+                            android:orientation="horizontal"
+                            android:padding="0dp">
+
+                            <TextView
+                                android:id="@+id/textViewRecordLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@string/recordLableAlbumDetail"
+                                android:textStyle="bold|italic"
+                                tools:text="@string/recordLableAlbumDetail" />
+
+                            <TextView
+                                android:id="@+id/textViewRecord"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@{album.recordLabel}"
+                                tools:text="@string/recordLableAlbumDetail" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+        </LinearLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/nav_view"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="HOLAAAAAA" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/albumsDetailRv"
-            android:layout_width="match_parent"
-            android:layout_height="234dp" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="293dp"
-            android:layout_height="160dp"
-            android:text="Button" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/albumDeatil"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
+            android:layout_marginStart="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@color/gris1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:menu="@menu/bottom_nav_menu" />
 
     </FrameLayout>
 </layout>

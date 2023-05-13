@@ -23,4 +23,10 @@
     <string name="descripcionAlbum">Descripcion</string>
     <string name="guardarAlbum">Guardar</string>
     <string name="cancelarAlbum">Cancelar</string>
+    <!-- ALBUM DETAIL-->
+    <string name="nombreAlbumDetail">Nombre:</string>
+    <string name="fechaLanzamientoAlbumDetail">Fecha de lanzamiento:</string>
+    <string name="descripciónAlbumDetail">Descripción:</string>
+    <string name="generoAlbumDetail">Genero:</string>
+    <string name="recordLableAlbumDetail">Record label:</string>
 </resources>

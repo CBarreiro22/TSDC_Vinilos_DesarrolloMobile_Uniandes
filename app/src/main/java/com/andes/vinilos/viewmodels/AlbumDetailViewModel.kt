@@ -18,11 +18,9 @@ class AlbumDetailViewModel(application: Application) : AndroidViewModel(applicat
 
     // Refresh album data from the network
     fun refreshData(currentAlbum: NewAlbum) {
-        val f = currentAlbum
-//        _albumMutableData.postValue(currentAlbum)
+        _albumMutableData.postValue(currentAlbum)
     }
 
-//     Initialize the ViewModel by refreshing data from the network
     init {
     }
 
@@ -31,7 +29,7 @@ class AlbumDetailViewModel(application: Application) : AndroidViewModel(applicat
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(AlbumDetailViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return AlbumsViewModel(app) as T
+                return AlbumDetailViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

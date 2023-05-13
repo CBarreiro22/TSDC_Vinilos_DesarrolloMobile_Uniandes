@@ -81,7 +81,8 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             action.albumId = album.id.toString()
             action.cover = album.cover
             action.name = album.name
-            action.description = album.genre
+            action.description = album.description
+            action.genre = album.genre
             action.recordLabel = album.recordLabel
             action.releaseDate = album.releaseDate
             holder.viewDataBinding.root.findNavController().navigate(action)

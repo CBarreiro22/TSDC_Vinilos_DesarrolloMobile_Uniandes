@@ -58,12 +58,12 @@ class AlbumDetailAdapter : RecyclerView.Adapter<AlbumDetailAdapter.AlbumDetailVi
         return AlbumDetailViewHolder(withDataBinding)
     }
 
+    override fun onBindViewHolder(holder: AlbumDetailViewHolder, position: Int) {
+    }
+
     // return the number of albums in the list
     override fun getItemCount(): Int {
         return 1
     }
 
-    override fun onBindViewHolder(holder: AlbumDetailViewHolder, position: Int) {
-
-    }
 }
