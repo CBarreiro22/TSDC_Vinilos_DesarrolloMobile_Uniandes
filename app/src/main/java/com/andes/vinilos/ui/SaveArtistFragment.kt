@@ -72,6 +72,13 @@ class SaveArtistFragment : Fragment() {
                 binding.artistImage.error = "El campo Imagen Url es obligatorio"
                 return@setOnClickListener
             }
+            if (!dateSelected) {
+                binding.artistBirthday.error = "El campo Fecha de Cumpleaños es obligatorio"
+                return@setOnClickListener
+            } else {
+                binding.artistBirthday.error = null
+            }
+
             val brithDate = SimpleDateFormat("yyyy-MM-dd").format(selectedDate.time)
 
             val artist = Musician(
