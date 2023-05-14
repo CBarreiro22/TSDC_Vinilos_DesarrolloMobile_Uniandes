@@ -3,7 +3,9 @@
 Este es un proyecto que se desarrolla con la Universidad de los Andes en la materia de Ingenieria de Software para aplicaciones mobiles . En este readme podras encontrar información sobre como instalar la aplicacion la aplicacion y donde encontrar el apk. Adicional a lo anterior en la wiki podra encontra mas informacion como son los planes de pruebas de cada uno de los sprint, la aruitectura que se uso entre otro. [wiki](https://github.com/CBarreiro22/TSDC_Vinilos_DesarrolloMobile_Uniandes/wiki)
 
 ## Uso del apk
-Para poder descargar el apk dirigirse a /apks/, para mas facilidad [Seleccione aqui](https://github.com/CBarreiro22/TSDC_Vinilos_DesarrolloMobile_Uniandes/tree/main/apks)
+Para poder usar el apk del sprint dirigirse a los release que se encuentra en la parte derecha del repositorio
+![image](https://github.com/CBarreiro22/TSDC_Vinilos_DesarrolloMobile_Uniandes/assets/111206402/a628d061-26a3-46b9-9551-f43df6feb832)
+
 
 ## Como configurar la aplicacion en ambiente local?
 ### Descarga el repositorio
