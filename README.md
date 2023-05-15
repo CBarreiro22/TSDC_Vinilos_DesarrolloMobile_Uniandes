@@ -54,7 +54,7 @@ Para correr los test se puede correr desde el android studio en la parte superio
 ![image](https://user-images.githubusercontent.com/111206402/235383611-abf3ff4e-4f74-4946-a959-c3d6b893e3ac.png)
 
 
-
+![Test](https://github.com/CBarreiro22/TSDC_Vinilos_DesarrolloMobile_Uniandes/assets/111206402/18b5d10a-ab3b-41f2-9393-b542eee09da0)
 
 
 
