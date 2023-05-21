@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="EditTextFieldStyle" parent="Widget.AppCompat.EditText">
+        <!-- Personaliza los atributos del EditText según tus necesidades -->
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:ems">10</item>
+        <item name="android:inputType">text</item>
+        <item name="android:textSize">24sp</item>
+        <!-- Otros atributos personalizados -->
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+        <!-- Personaliza los atributos del Button según tus necesidades -->
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">20sp</item>
+        <!-- Otros atributos personalizados -->
+    </style>
+</resources>
