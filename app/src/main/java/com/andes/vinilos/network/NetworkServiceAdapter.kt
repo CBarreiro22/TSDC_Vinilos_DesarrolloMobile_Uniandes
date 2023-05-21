@@ -1,6 +1,7 @@
 package com.andes.vinilos.network
 
 import android.content.Context
+import android.util.Log
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
 import com.android.volley.Request
@@ -38,14 +39,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         onComplete: (resp: JSONObject) -> Unit,
         onError: (error: VolleyError) -> Unit
     ) {
-        requestQueue.add(
-            postRequest(
-                "albums",
-                body,
-                { response -> onComplete(response) },
-                { error -> onError(error) }
-            )
-        )
+        createResource("albums", body, onComplete, onError)
     }
 
     fun createMusician(
@@ -53,9 +47,27 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         onComplete: (resp: JSONObject) -> Unit,
         onError: (error: VolleyError) -> Unit
     ) {
+        createResource("musicians", body, onComplete, onError)
+    }
+
+    fun createPrize(
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        Log.i("tAG=", "Ingreso a crear Precio");
+        createResource("prizes", body, onComplete, onError)
+    }
+
+    private fun createResource(
+        resourcePath: String,
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(
             postRequest(
-                "musicians",
+                resourcePath,
                 body,
                 { response -> onComplete(response) },
                 { error -> onError(error) }
