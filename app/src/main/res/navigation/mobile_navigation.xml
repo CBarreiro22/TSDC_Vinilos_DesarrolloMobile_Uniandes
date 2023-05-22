@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/navigation_prize"
         android:name="com.andes.vinilos.ui.SavePrizeFragment"
-        android:label="@string/title_prize"
+        android:label="@string/title_create_prize"
         tools:layout="@layout/fragment_create_prize" >
 
         <action
