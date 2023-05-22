@@ -52,17 +52,13 @@
 
                 <Button
                     android:id="@+id/cancelarCrearPrize"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/ButtonStyle"
                     android:text="@string/cancelar"
                     app:backgroundTint="#E91E63" />
 
                 <Button
                     android:id="@+id/guardarCrearPrize"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    style="@style/ButtonStyle"
                     android:text="@string/guardar"
                     app:backgroundTint="#4CAF50" />
             </LinearLayout>

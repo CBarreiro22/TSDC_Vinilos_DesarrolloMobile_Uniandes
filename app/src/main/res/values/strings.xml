@@ -36,6 +36,7 @@
     <!--Crear Prize-->
     <string name="prizeOrganization">Organización</string>
     <string name="title_prize">Prizes</string>
+    <string name="title_create_prize">Create Prizes</string>
     <!--String Genericos-->
     <string name="guardar">Guardar</string>
     <string name="cancelar">Cancelar</string>
