@@ -1,6 +1,7 @@
 package com.andes.vinilos.network
 
 import android.content.Context
+import android.util.Log
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
 import com.android.volley.Request
@@ -38,14 +39,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         onComplete: (resp: JSONObject) -> Unit,
         onError: (error: VolleyError) -> Unit
     ) {
-        requestQueue.add(
-            postRequest(
-                "albums",
-                body,
-                Response.Listener<JSONObject> { response -> onComplete(response) },
-                Response.ErrorListener { error -> onError(error) }
-            )
-        )
+        createResource("albums", body, onComplete, onError)
     }
 
     fun createMusician(
@@ -53,12 +47,30 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         onComplete: (resp: JSONObject) -> Unit,
         onError: (error: VolleyError) -> Unit
     ) {
+        createResource("musicians", body, onComplete, onError)
+    }
+
+    fun createPrize(
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
+        Log.i("tAG=", "Ingreso a crear Precio");
+        createResource("prizes", body, onComplete, onError)
+    }
+
+    private fun createResource(
+        resourcePath: String,
+        body: JSONObject,
+        onComplete: (resp: JSONObject) -> Unit,
+        onError: (error: VolleyError) -> Unit
+    ) {
         requestQueue.add(
             postRequest(
-                "musicians",
+                resourcePath,
                 body,
-                Response.Listener<JSONObject> { response -> onComplete(response) },
-                Response.ErrorListener { error -> onError(error) }
+                { response -> onComplete(response) },
+                { error -> onError(error) }
             )
         )
     }
@@ -67,7 +79,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         requestQueue.add(
             getRequest(
                 "albums",
-                Response.Listener<String> { response ->
+                { response ->
                     val resp = JSONArray(response)
                     val list = mutableListOf<Album>()
                     for (i in 0 until resp.length()) {
@@ -86,33 +98,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
                     }
                     cont.resume(list)
                 },
-                Response.ErrorListener { error -> cont.resumeWithException(error) }
-            )
-        )
-    }
-
-    suspend fun getMusician(): List<Musician> = suspendCoroutine { cont ->
-        requestQueue.add(
-            getRequest(
-                "musicians",
-                Response.Listener<String> { response ->
-                    val resp = JSONArray(response)
-                    val list = mutableListOf<Musician>()
-                    for (i in 0 until resp.length()) {
-                        val item = resp.getJSONObject(i)
-                        list.add(
-                            i, Musician(
-                                id = item.getInt("id"),
-                                name = item.getString("name"),
-                                image = item.getString("image"),
-                                description = item.getString("description"),
-                                birthDate = item.getString("birthDate"),
-                            )
-                        )
-                    }
-                    cont.resume(list)
-                },
-                Response.ErrorListener { error -> cont.resumeWithException(error) }
+                { error -> cont.resumeWithException(error) }
             )
         )
     }

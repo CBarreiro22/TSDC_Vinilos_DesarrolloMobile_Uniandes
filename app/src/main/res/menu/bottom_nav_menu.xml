@@ -7,9 +7,9 @@
         android:title="@string/title_artist" />
 
     <item
-        android:id="@+id/navigation_options"
-        android:icon="@drawable/anadir"
-        android:title="Añadir premio"/>
+        android:id="@+id/navigation_prize"
+        android:icon="@drawable/prizes_icon_29"
+        android:title="@string/title_prize"/>
 
     <item
         android:id="@+id/navigation_albums"

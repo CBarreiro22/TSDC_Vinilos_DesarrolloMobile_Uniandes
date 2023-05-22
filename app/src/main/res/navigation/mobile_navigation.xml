@@ -16,15 +16,15 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_options"
-        android:name="com.andes.vinilos.ui.OptionsFragment"
-        tools:layout="@layout/fragment_options" >
+        android:id="@+id/navigation_prize"
+        android:name="com.andes.vinilos.ui.SavePrizeFragment"
+        android:label="@string/title_prize"
+        tools:layout="@layout/fragment_create_prize" >
+
         <action
-            android:id="@+id/action_navigation_options_to_saveAlbumFragment"
-            app:destination="@id/saveAlbumFragment" />
-        <action
-            android:id="@+id/action_navigation_options_to_saveArtistFragment"
-            app:destination="@id/saveArtistFragment" />
+            android:id="@+id/action_savePrizeFragment_to_navigation_artist"
+            app:destination="@id/navigation_artist" />
+
     </fragment>
 
     <fragment

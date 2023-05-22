@@ -23,8 +23,6 @@
     <string name="seleccionEtiqueta">Etiqueta de grabacion</string>
     <string name="descripcionAlbum">Descripcion</string>
     <string name="album_description_image"> </string>
-    <string name="guardarAlbum">Guardar</string>
-    <string name="cancelarAlbum">Cancelar</string>
     <string name="DescripcionArtista">Descripción</string>
     <string name="TituloCrearAlbum">CREAR ALBUM</string>
     <string name="TituloCrearArtista">CREAR ARTISTA</string>
@@ -35,4 +33,12 @@
     <string name="recordLableAlbumDetail">Record label:</string>
     <!-- Listado de artistas-->
     <string name="crearArtista">Crear artista</string>
+    <!--Crear Prize-->
+    <string name="prizeOrganization">Organización</string>
+    <string name="title_prize">Prizes</string>
+    <!--String Genericos-->
+    <string name="guardar">Guardar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="descripcion">Descripcion</string>
+    <string name="Organization">Organización</string>
 </resources>

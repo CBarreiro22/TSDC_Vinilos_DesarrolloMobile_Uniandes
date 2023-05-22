@@ -25,7 +25,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="@string/DescripcionArtista"
+            android:hint="@string/descripcion"
             android:inputType="text"
             android:textSize="24sp" />
 
@@ -61,7 +61,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/cancelarAlbum"
+                android:text="@string/cancelar"
                 app:backgroundTint="#E91E63" />
 
             <Button
@@ -69,7 +69,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/guardarAlbum"
+                android:text="@string/guardar"
                 app:backgroundTint="#4CAF50" />
         </LinearLayout>
     </LinearLayout>
