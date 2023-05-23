@@ -24,42 +24,47 @@ class AlbumDetailFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentAlbumDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        (activity as AppCompatActivity).supportActionBar?.title = "Album Detail"
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        requireActivity().actionBar?.apply {
+            title = "Album Detail"
+            setDisplayHomeAsUpEnabled(true)
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val activity = requireNotNull(requireActivity())
+        val activity = requireActivity()
         viewModel = ViewModelProvider(this, AlbumDetailViewModel.Factory(activity.application))
             .get(AlbumDetailViewModel::class.java)
         val bundle = arguments
-        if (bundle == null){
-            Log.d("Confimation", "AlbumDetailFragment didnt receive info")
+        if (bundle == null) {
+            Log.d("Confirmation", "AlbumDetailFragment didn't receive info")
         } else {
             val arguments = AlbumDetailFragmentArgs.fromBundle(bundle)
             val currentAlbum = arguments.albumId?.let {
-                Album(it.toInt(), arguments.name.toString(),arguments.cover.toString(),
-                    arguments.releaseDate.toString(),arguments.description.toString(),
-                    arguments.genre.toString(), arguments.recordLabel.toString())
+                Album(
+                    it.toInt(),
+                    arguments.name.toString(),
+                    arguments.cover.toString(),
+                    arguments.releaseDate.toString(),
+                    arguments.description.toString(),
+                    arguments.genre.toString(),
+                    arguments.recordLabel.toString()
+                )
             }
-            if (currentAlbum != null) {
-                viewModel.refreshData(currentAlbum)
+            currentAlbum?.let {
+                viewModel.refreshData(it)
             }
         }
-        viewModel.album.observe(viewLifecycleOwner) {
-            it.apply {
-                binding.album=this
-                Glide.with(requireContext()).load(this.cover).into(binding.imageDetailAlbum)
-            }
+        viewModel.album.observe(viewLifecycleOwner) { album ->
+            binding.album = album
+            Glide.with(requireContext()).load(album.cover).into(binding.imageDetailAlbum)
         }
     }
 
