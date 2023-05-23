@@ -54,19 +54,6 @@
                     android:padding="0dp">
 
                     <TextView
-                        android:id="@+id/textViewGenderField"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/genero1"
-                        android:textStyle="bold|italic"
-                        android:textColor="@color/black"
-                        android:paddingStart="8dp"
-                        android:paddingTop="3dp"
-                        android:paddingEnd="5dp"
-                        android:paddingBottom="2dp"
-                        tools:text="Gender" />
-
-                    <TextView
                         android:id="@+id/textViewGender"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

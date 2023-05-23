@@ -42,4 +42,6 @@
     <string name="cancelar">Cancelar</string>
     <string name="descripcion">Descripcion</string>
     <string name="Organization">Organización</string>
+    <string name="Birthday">Nacimiento</string>
+    <string name="artista">Artista</string>
 </resources>
