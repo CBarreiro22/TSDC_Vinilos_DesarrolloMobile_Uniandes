@@ -10,4 +10,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="gris1">#585858</color>
     <color name="gris2">#848484</color>
+    <color name="Background">#555891</color>
+    <color name="Background2">#CCE0FF</color>
+    <color name="cancelar">#D60505</color>
+    <color name="guardar">#2B882E</color>
 </resources>

@@ -4,16 +4,20 @@
     <item
         android:id="@+id/navigation_artist"
         android:icon="@drawable/artista"
-        android:title="@string/title_artist" />
+        android:title="@string/title_artist"
+        android:textColor="@color/white"/>
+
 
     <item
         android:id="@+id/navigation_prize"
         android:icon="@drawable/prizes_icon_29"
-        android:title="@string/title_prize"/>
+        android:title="@string/title_prize"
+        android:textColor="@color/white"/>
 
     <item
         android:id="@+id/navigation_albums"
         android:icon="@drawable/album_de_musica"
-        android:title="@string/title_albums" />
+        android:title="@string/title_albums"
+        android:textColor="@color/white"/>
 
 </menu>

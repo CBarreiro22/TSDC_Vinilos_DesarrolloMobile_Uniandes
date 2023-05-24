@@ -62,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/cancelar"
-                app:backgroundTint="#E91E63" />
+                app:backgroundTint="@color/cancelar" />
 
             <Button
                 android:id="@+id/guardarCrearArtista"
@@ -70,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/guardar"
-                app:backgroundTint="#4CAF50" />
+                app:backgroundTint="@color/guardar" />
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

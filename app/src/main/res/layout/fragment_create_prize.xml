@@ -54,13 +54,13 @@
                     android:id="@+id/cancelarCrearPrize"
                     style="@style/ButtonStyle"
                     android:text="@string/cancelar"
-                    app:backgroundTint="#E91E63" />
+                    app:backgroundTint="@color/cancelar" />
 
                 <Button
                     android:id="@+id/guardarCrearPrize"
                     style="@style/ButtonStyle"
                     android:text="@string/guardar"
-                    app:backgroundTint="#4CAF50" />
+                    app:backgroundTint="@color/guardar" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

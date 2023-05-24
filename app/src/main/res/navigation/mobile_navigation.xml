@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_artist"
         android:name="com.andes.vinilos.ui.ArtistFragment"
-        android:label="@string/title_artist"
+        android:label="@string/title_list_artist"
         tools:layout="@layout/fragment_artist" >
         <action
             android:id="@+id/action_navigation_artist_to_saveArtistFragment"
@@ -30,7 +30,7 @@
     <fragment
         android:id="@+id/navigation_albums"
         android:name="com.andes.vinilos.ui.AlbumsFragment"
-        android:label="@string/title_albums"
+        android:label="@string/title_list_album"
         tools:layout="@layout/fragment_albums" >
         <action
             android:id="@+id/action_navigation_albums_to_saveAlbumFragment"
