@@ -15,12 +15,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
+        android:textSize="20sp"
         app:strokeColor="@color/cardview_shadow_start_color"
         app:strokeWidth="1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
@@ -69,7 +70,7 @@
 
                     <TextView
                         android:id="@+id/textViewDescription"
-                        android:layout_width="192dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
                         android:paddingTop="3dp"
