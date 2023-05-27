@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
+import com.andes.vinilos.models.Prize
 import com.android.volley.Request
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -74,7 +75,31 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
             )
         )
     }
+    suspend fun getPrizes(): List<Prize> = suspendCoroutine { cont ->
+        requestQueue.add(
+            getRequest(
+                "prizes",
+                { response ->
+                    val resp = JSONArray(response)
+                    val list = mutableListOf<Prize>()
+                    for (i in 0 until resp.length()) {
+                        val item = resp.getJSONObject(i)
+                        list.add(
+                            i, Prize(
+                                id = item.getInt("id"),
+                                name = item.getString("name"),
+                                description = item.getString("description"),
+                                organization=item.getString("organization")
 
+                            )
+                        )
+                    }
+                    cont.resume(list)
+                },
+                { error -> cont.resumeWithException(error) }
+            )
+        )
+    }
     suspend fun getAlbums(): List<Album> = suspendCoroutine { cont ->
         requestQueue.add(
             getRequest(
