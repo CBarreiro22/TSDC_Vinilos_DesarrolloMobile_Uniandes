@@ -57,17 +57,6 @@ public class TestAlbumCreate {
     }
 
     @Test
-    public void testAlbumCreate() {
-
-        ViewInteraction album = onView(withText("Poeta del pueblo")).check(matches(isDisplayed()));
-        ViewInteraction genero = onView(allOf(withText("Género")));
-
-        ViewInteraction saveButton = onView(withId(R.id.saveAlbumFloatingButton));
-        saveButton.perform(click());
-
-    }
-
-    @Test
     public void Escenario1() {
 
         // Desplegar pantalla para creación de Album

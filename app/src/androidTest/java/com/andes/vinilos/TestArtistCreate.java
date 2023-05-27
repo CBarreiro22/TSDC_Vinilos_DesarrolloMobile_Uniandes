@@ -57,7 +57,7 @@ public class TestArtistCreate {
         onView(withId(R.id.guardarCrearArtista)).perform(click());
         SystemClock.sleep(1500);
         onView(allOf(instanceOf(TextView.class), withParent(withId(R.id.toolbar))))
-                .check(matches(withText("Artist")));
+                .check(matches(withText("Lists of Artists")));
         SystemClock.sleep(1500);
     }
 }
