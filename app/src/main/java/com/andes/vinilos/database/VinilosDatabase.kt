@@ -8,7 +8,7 @@ import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Prize
 
 
-@Database(entities = [Album::class, Prize::class], version = 1, exportSchema = false)
+@Database(entities = [Album::class, Prize::class], version = 2, exportSchema = false)
 abstract class VinilosRoomDatabase : RoomDatabase() {
     abstract fun albumsDao(): AlbumsDao
     abstract fun prizesDao(): PrizesDao
