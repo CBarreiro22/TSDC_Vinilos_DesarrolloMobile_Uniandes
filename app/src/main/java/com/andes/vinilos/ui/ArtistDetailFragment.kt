@@ -1,16 +1,20 @@
 package com.andes.vinilos.ui
 
+import android.R
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import com.andes.vinilos.ui.ArtistDetailFragment
 import com.andes.vinilos.databinding.FragmentArtistDetailBinding
 import com.andes.vinilos.models.Musician
 import com.andes.vinilos.viewmodels.ArtistDetailViewModel
+import com.andes.vinilos.viewmodels.DefaultCoroutineDispatcherProvider
 import com.bumptech.glide.Glide
 
 
@@ -31,8 +35,9 @@ class ArtistDetailFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         val activity = requireActivity()
+        val dispatcherProvider = DefaultCoroutineDispatcherProvider()
         viewModel =
-            ViewModelProvider(this, ArtistDetailViewModel.Factory(activity.application)).get(
+            ViewModelProvider(this, ArtistDetailViewModel.Factory(activity.application,dispatcherProvider)).get(
                 ArtistDetailViewModel::class.java
             )
         val bundle = arguments
@@ -40,7 +45,6 @@ class ArtistDetailFragment : Fragment() {
             Log.d("Confirmation", "ArtistDetailFragment didn't receive info")
         } else {
             val arguments = ArtistDetailFragmentArgs.fromBundle(bundle)
-            Log.d("********", "args " + arguments.name)
             val currentArtist = arguments.artistId?.let {
                 Musician(
                     it.toInt(),
@@ -58,6 +62,28 @@ class ArtistDetailFragment : Fragment() {
                 Glide.with(requireContext()).load(artist.image).into(binding.imageDetailArtist)
             }
         }
+        val premios = mutableListOf<String>()
+        viewModel.prizes.observe(viewLifecycleOwner) { prizeList ->
+            prizeList?.let {
+                for (prize in it) {
+                    premios.add(prize.name)
+                }
+                val adapter = ArrayAdapter(requireContext(), R.layout.simple_spinner_item, premios)
+                adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+                binding.premiosLista.adapter = adapter
+            }
+        }
+
+        // Agregar un listener al Spinner
+        binding.premiosLista.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                val premioSeleccionado = premios[position]
+                Log.d("Premio seleccionado", premioSeleccionado)
+            }
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+            }
+        }
+
     }
 
     override fun onDestroy() {
