@@ -46,4 +46,7 @@
     <string name="Birthday">Nacimiento</string>
     <string name="artista">Artista</string>
     <string name="title_list_artist">Lists of Artists</string>
+    <!--String Agregar premio-->
+    <string name="nombrePremiosDropList">Premios:</string>
+
 </resources>

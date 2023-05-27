@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import com.andes.vinilos.databinding.FragmentAlbumDetailBinding
 import com.andes.vinilos.models.Album
@@ -66,6 +68,18 @@ class AlbumDetailFragment : Fragment() {
             binding.album = album
             Glide.with(requireContext()).load(album.cover).into(binding.imageDetailAlbum)
         }
+        val premios = mutableListOf<String>()
+        // Agregar valores a la lista
+        premios.add("Premio 1")
+        premios.add("Premio 2")
+        premios.add("Premio 3")
+        // Crear el adaptador para el Spinner
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, premios)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        // Asignar el adaptador al Spinner
+        binding.premiosLista.adapter = adapter
+
+
     }
 
     override fun onDestroyView() {
