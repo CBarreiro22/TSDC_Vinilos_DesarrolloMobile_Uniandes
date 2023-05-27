@@ -109,8 +109,8 @@
     <fragment
         android:id="@+id/saveArtistFragment"
         android:name="com.andes.vinilos.ui.SaveArtistFragment"
-        android:label="fragment_create_artist"
-        tools:layout="@layout/fragment_create_artist" >
+        android:label="@string/TituloCrearArtista"
+        tools:layout="@layout/fragment_create_artist">
         <action
             android:id="@+id/action_saveArtistFragment_to_navigation_artist"
             app:destination="@id/navigation_artist" />
