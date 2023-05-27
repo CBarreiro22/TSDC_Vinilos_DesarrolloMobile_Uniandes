@@ -68,9 +68,9 @@ class ArtistDetailFragment : Fragment() {
             }
         }
         val premios = mutableListOf<String>()
+        premios.add("Seleccionar premio:")
         viewModel.prizes.observe(viewLifecycleOwner) { prizeList ->
             prizeList?.let {
-                premios.add("Seleccionar premio:")
                 for (prize in it) {
                     premios.add(prize.name)
                 }

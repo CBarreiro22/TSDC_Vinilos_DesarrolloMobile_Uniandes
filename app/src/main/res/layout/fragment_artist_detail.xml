@@ -172,18 +172,21 @@
 
                                 <TextView
                                     android:id="@+id/textViewnombrePremiosLabel"
-                                    android:layout_width="214dp"
+                                    android:layout_width="156dp"
                                     android:layout_height="wrap_content"
                                     android:paddingStart="8dp"
                                     android:paddingTop="3dp"
                                     android:paddingEnd="5dp"
                                     android:paddingBottom="2dp"
                                     android:text="@string/nombrePremiosDropList"
-                                    android:textStyle="bold|italic" />
+                                    android:textAlignment="center"
+                                    android:textStyle="bold|italic"
+                                    tools:layout_gravity="center" />
+
 
                                 <Button
                                     android:id="@+id/buttonPremio"
-                                    android:layout_width="155dp"
+                                    android:layout_width="110dp"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:foregroundTint="#8BC34A"
@@ -197,8 +200,10 @@
 
                             <Spinner
                                 android:id="@+id/premiosLista"
-                                android:layout_width="367dp"
-                                android:layout_height="wrap_content" />
+                                android:layout_width="273dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_horizontal" />
+
 
                         </LinearLayout>
                     </LinearLayout>
