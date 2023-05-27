@@ -18,7 +18,8 @@
             android:ems="10"
             android:hint="@string/nombreAlbum"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:autofillHints="text"/>
 
         <EditText
             android:id="@+id/artistDescription"
@@ -27,7 +28,8 @@
             android:ems="10"
             android:hint="@string/descripcion"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:autofillHints="text"/>
 
         <EditText
             android:id="@+id/artistImage"
@@ -36,7 +38,8 @@
             android:ems="10"
             android:hint="Url Imagen"
             android:inputType="text"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            android:autofillHints="text"/>
 
         <Button
             android:id="@+id/artistBirthday"
@@ -61,16 +64,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/white"
                 android:text="@string/cancelar"
-                app:backgroundTint="@color/cancelar" />
+                app:backgroundTint="@color/cancelar"
+                style="?android:attr/buttonBarButtonStyle"/>
 
             <Button
                 android:id="@+id/guardarCrearArtista"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/white"
                 android:text="@string/guardar"
-                app:backgroundTint="@color/guardar" />
+                app:backgroundTint="@color/guardar"
+                style="?android:attr/buttonBarButtonStyle"/>
         </LinearLayout>
     </LinearLayout>
 </FrameLayout>

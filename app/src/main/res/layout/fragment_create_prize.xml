@@ -34,17 +34,20 @@
             <EditText
                 android:id="@+id/prizeName"
                 style="@style/EditTextFieldStyle"
-                android:hint="@string/nombreAlbum" />
+                android:hint="@string/nombreAlbum"
+                android:autofillHints="text"/>
 
             <EditText
                 android:id="@+id/prizeDescription"
                 style="@style/EditTextFieldStyle"
-                android:hint="@string/descripcion" />
+                android:hint="@string/descripcion"
+                android:autofillHints="text"/>
 
             <EditText
                 android:id="@+id/prizeOrganization"
                 style="@style/EditTextFieldStyle"
-                android:hint="@string/prizeOrganization" />
+                android:hint="@string/prizeOrganization"
+                android:autofillHints="text"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
