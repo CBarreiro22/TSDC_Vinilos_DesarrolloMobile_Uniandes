@@ -57,14 +57,13 @@
                     </LinearLayout>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginTop="5dp"
                         android:layout_weight="5"
                         android:orientation="vertical"
                         android:padding="5dp">
-
 
 
                         <LinearLayout
@@ -224,6 +223,86 @@
                                 android:text="@{album.recordLabel}"
                                 tools:text="@string/recordLableAlbumDetail" />
                         </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="5"
+                        android:orientation="vertical"
+                        android:padding="5dp">
+
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:padding="0dp">
+
+                            <TextView
+                                android:id="@+id/textViewnombrePremiosLabel"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:paddingStart="8dp"
+                                android:paddingTop="3dp"
+                                android:paddingEnd="5dp"
+                                android:paddingBottom="2dp"
+                                android:text="@string/nombreAlbumDetail"
+                                android:textStyle="bold|italic"
+                                tools:text="@string/nombrePremiosDropList" />
+
+                            <Spinner
+                                android:id="@+id/premiosLista"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:orientation="horizontal"
+                            android:padding="0dp">
+
+                            <Button
+                                android:id="@+id/buttonPremio"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:foregroundTint="#8BC34A"
+                                android:text="Agregar premio"
+                                android:textSize="10sp" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5"
+                            android:orientation="horizontal"
+                            android:padding="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5"
+                            android:orientation="horizontal"
+                            android:padding="0dp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_weight="5"
+                            android:orientation="horizontal"
+                            android:padding="0dp" />
 
                     </LinearLayout>
 

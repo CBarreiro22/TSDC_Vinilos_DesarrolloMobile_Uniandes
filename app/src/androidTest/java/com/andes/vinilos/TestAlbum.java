@@ -55,7 +55,7 @@ public class TestAlbum {
         //validar Nombre de un album
         ViewInteraction album = onView(withId(R.id.nombreAlbum));
         //validar Nombre de genero
-        ViewInteraction generoName = onView(withId(R.id.nombreAlbum));
+        ViewInteraction generoName = onView(withId(R.id.albumGeneros));
         ViewInteraction cover = onView(withId(R.id.cover));
     }
 
