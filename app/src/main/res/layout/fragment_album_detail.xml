@@ -51,7 +51,8 @@
                             android:id="@+id/imageDetailAlbum"
                             android:layout_width="132dp"
                             android:layout_height="180dp"
-                            app:srcCompat="@drawable/album_de_musica" />
+                            app:srcCompat="@drawable/album_de_musica"
+                            android:contentDescription="@string/album_detail_image"/>
 
                     </LinearLayout>
 
