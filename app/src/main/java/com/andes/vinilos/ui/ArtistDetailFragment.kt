@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat
 import androidx.lifecycle.ViewModelProvider
 import com.andes.vinilos.ui.ArtistDetailFragment
 import com.andes.vinilos.databinding.FragmentArtistDetailBinding
@@ -37,7 +39,10 @@ class ArtistDetailFragment : Fragment() {
         val activity = requireActivity()
         val dispatcherProvider = DefaultCoroutineDispatcherProvider()
         viewModel =
-            ViewModelProvider(this, ArtistDetailViewModel.Factory(activity.application,dispatcherProvider)).get(
+            ViewModelProvider(
+                this,
+                ArtistDetailViewModel.Factory(activity.application, dispatcherProvider)
+            ).get(
                 ArtistDetailViewModel::class.java
             )
         val bundle = arguments
@@ -65,6 +70,7 @@ class ArtistDetailFragment : Fragment() {
         val premios = mutableListOf<String>()
         viewModel.prizes.observe(viewLifecycleOwner) { prizeList ->
             prizeList?.let {
+                premios.add("Seleccionar premio:")
                 for (prize in it) {
                     premios.add(prize.name)
                 }
@@ -74,16 +80,38 @@ class ArtistDetailFragment : Fragment() {
             }
         }
 
+        var flag = false
         // Agregar un listener al Spinner
         binding.premiosLista.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+
                 val premioSeleccionado = premios[position]
                 Log.d("Premio seleccionado", premioSeleccionado)
+                if(position !=0) {
+                    flag = true
+                }
+
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
 
+        binding.buttonPremio.setOnClickListener() {
+            if (flag) {
+                val toast = Toast.makeText(
+                    requireContext(),
+                    "Se agregó el premio exitosamente",
+                    Toast.LENGTH_LONG
+                )
+                toast.show()
+            }
+        }
     }
 
     override fun onDestroy() {

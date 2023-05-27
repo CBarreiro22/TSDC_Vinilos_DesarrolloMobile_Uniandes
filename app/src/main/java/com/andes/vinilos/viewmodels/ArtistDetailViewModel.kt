@@ -1,6 +1,8 @@
 package com.andes.vinilos.viewmodels
 
 import android.app.Application
+import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -66,7 +68,6 @@ class ArtistDetailViewModel(
             _eventNetworkError.value = true
         }
     }
-
     class Factory(
         private val app: Application,
         private val dispatcherProvider: CoroutineDispatcherProvider
