@@ -5,7 +5,8 @@
         android:id="@+id/navigation_artist"
         android:icon="@drawable/artista"
         android:title="@string/title_artist"
-        android:textColor="@color/white"/>
+        android:textColor="@color/white"
+        />
 
 
     <item

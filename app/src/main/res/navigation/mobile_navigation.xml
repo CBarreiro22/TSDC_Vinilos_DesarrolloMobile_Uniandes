@@ -13,6 +13,16 @@
         <action
             android:id="@+id/action_navigation_artist_to_saveArtistFragment"
             app:destination="@id/saveArtistFragment" />
+        <action
+            android:id="@+id/action_navigation_artist_to_artist_detail"
+            app:destination="@id/artist_detail" >
+            <argument
+                android:name="birthday"
+                android:defaultValue="@null" />
+            <argument
+                android:name="artistId"
+                android:defaultValue="@null" />
+        </action>
     </fragment>
 
     <fragment
@@ -58,43 +68,43 @@
     <fragment
         android:id="@+id/albumDetailFragment"
         android:name="com.andes.vinilos.ui.AlbumDetailFragment"
-        android:label="AlbumDetailFragment"
+        android:label="@string/albumDetail"
         tools:layout="@layout/fragment_album_detail">
         <argument
             android:name="albumId"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="cover"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="description"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="genre"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="name"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="recordLabel"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
         <argument
             android:name="releaseDate"
+            android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"
-            android:defaultValue="@null" />
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/saveArtistFragment"
@@ -104,5 +114,36 @@
         <action
             android:id="@+id/action_saveArtistFragment_to_navigation_artist"
             app:destination="@id/navigation_artist" />
+    </fragment>
+    <fragment
+        android:id="@+id/artist_detail"
+        android:name="com.andes.vinilos.ui.ArtistDetailFragment"
+        android:label="@string/artistDetail"
+        tools:layout="@layout/fragment_artist_detail" >
+        <argument
+            android:name="birthday"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="name"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <argument
+            android:name="description"
+            app:argType="string"
+            android:defaultValue="@null"
+            app:nullable="true" />
+        <argument
+            android:name="artistId"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>

@@ -1,14 +1,20 @@
 package com.andes.vinilos.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.core.net.toUri
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.andes.vinilos.R
 import com.andes.vinilos.databinding.MusicianItemBinding
 import com.andes.vinilos.models.Musician
+import com.andes.vinilos.ui.AlbumsFragmentDirections
+import com.andes.vinilos.ui.ArtistFragment
+import com.andes.vinilos.ui.ArtistFragmentDirections
+import com.andes.vinilos.ui.SaveAlbumFragmentDirections
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
@@ -70,7 +76,15 @@ class ArtistAdapter : RecyclerView.Adapter<ArtistAdapter.ArtistViewHolder>() {
         holder.bind(artists[position])
         // set a click listener for the album item view
         holder.viewDataBinding.root.setOnClickListener {
-
+            val action = ArtistFragmentDirections.actionNavigationArtistToArtistDetail()
+            val artist = artists[position]
+            Log.d("******Artist Detail Id:", "***** "+ artist.image)
+            action.artistId = artist.id.toString()
+            action.name = artist.name
+            action.description = artist.description
+            action.image = artist.image
+            action.birthday = artist.birthDate
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 }
