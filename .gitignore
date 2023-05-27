@@ -339,3 +339,4 @@ gradle.properties
 gradle.properties
 *.properties
 gradle.properties
+build.gradle
