@@ -50,4 +50,8 @@
     <string name="album_detail_image">Album detail image</string>
     <string name="create_prize_image">Create prize image</string>
     <string name="music_image">Music image</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="artistDetail">Detalle de Artista</string>
+    <string name="albumDetail">Detalle de Album</string>
 </resources>
