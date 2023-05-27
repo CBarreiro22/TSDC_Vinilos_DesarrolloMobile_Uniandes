@@ -27,7 +27,8 @@
                 android:id="@+id/image"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:padding="5dp" />
+                android:padding="5dp"
+                android:contentDescription="@string/music_image"/>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -73,14 +74,14 @@
                         android:layout_height="wrap_content"
                         android:paddingStart="8dp"
                         android:paddingTop="3dp"
-                        android:paddingEnd="20dp"
+                        android:paddingEnd="70dp"
                         android:paddingBottom="5dp"
                         android:text="@{artist.getFormattedBirthDate()}"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
                         android:textSize="10sp"
-                        tools:text="Birthdate"
-                        tools:ignore="SmallSp" />
+                        tools:ignore="SmallSp"
+                        tools:text="Birthdate" />
                 </LinearLayout>
 
                 <TextView
