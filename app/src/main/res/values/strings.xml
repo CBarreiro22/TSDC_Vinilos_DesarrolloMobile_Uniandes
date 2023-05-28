@@ -46,6 +46,13 @@
     <string name="Birthday">Nacimiento</string>
     <string name="artista">Artista</string>
     <string name="title_list_artist">Lists of Artists</string>
+    <string name="album_image">Album image</string>
+    <string name="album_detail_image">Album detail image</string>
+    <string name="create_prize_image">Create prize image</string>
+    <string name="music_image">Music image</string>
+    <!--String Agregar premio-->
+    <string name="nombrePremiosDropList">Premios:</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="artistDetail">Detalle de Artista</string>
