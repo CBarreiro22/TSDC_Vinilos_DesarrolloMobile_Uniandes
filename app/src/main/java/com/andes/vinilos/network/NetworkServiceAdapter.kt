@@ -1,6 +1,7 @@
 package com.andes.vinilos.network
 
 import android.content.Context
+import android.os.AsyncTask
 import android.util.Log
 import com.andes.vinilos.models.Album
 import com.andes.vinilos.models.Musician
@@ -17,6 +18,73 @@ import org.json.JSONObject
 import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 import kotlin.coroutines.suspendCoroutine
+
+
+private class FillResponseAlbumTask : AsyncTask<String, Void, MutableList<Album>>() {
+    override fun doInBackground(vararg response: String): MutableList<Album> {
+        val resp = JSONArray(response[0])
+        val list = mutableListOf<Album>()
+        for (i in 0 until resp.length()) {
+            val item = resp.getJSONObject(i)
+            list.add(
+                i, Album(
+                    id = item.getInt("id"),
+                    name = item.getString("name"),
+                    cover = item.getString("cover"),
+                    recordLabel = item.getString("recordLabel"),
+                    releaseDate = item.getString("releaseDate"),
+                    genre = item.getString("genre"),
+                    description = item.getString("description")
+                )
+            )
+        }
+        return list
+    }
+}
+
+private class FillResponseArtistTask : AsyncTask<String, Void, MutableList<Musician>>() {
+    override fun doInBackground(vararg response: String): MutableList<Musician> {
+        val list = mutableListOf<Musician>()
+        val resp = JSONArray(response[0])
+        for (i in 0 until resp.length()) {
+            val item = resp.getJSONObject(i)
+            val albumList = mutableListOf<Album>()
+            val albumsArray = item.getJSONArray("albums")
+            for (j in 0 until albumsArray.length()) {
+                val albumObject = albumsArray.getJSONObject(j)
+                val albumId = albumObject.getInt("id")
+                val albumName = albumObject.getString("name")
+                val albumCover = albumObject.getString("cover")
+                val releaseDate = albumObject.getString("releaseDate")
+                val description = albumObject.getString("description")
+                val genre = albumObject.getString("genre")
+                val recordLabel = albumObject.getString("recordLabel")
+                albumList.add(
+                    j,
+                    Album(
+                        name = albumName,
+                        cover = albumCover,
+                        releaseDate = releaseDate,
+                        description = description,
+                        genre = genre,
+                        recordLabel = recordLabel,
+                        id = albumId
+                    )
+                )
+            }
+            list.add(
+                i, Musician(
+                    id = item.getInt("id"),
+                    name = item.getString("name"),
+                    image = item.getString("image"),
+                    description = item.getString("description"),
+                    birthDate = item.getString("birthDate"), albums = albumList
+                )
+            )
+        }
+        return list
+    }
+}
 
 class NetworkServiceAdapter private constructor(private val context: Context) {
 
@@ -105,22 +173,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
             getRequest(
                 "albums",
                 { response ->
-                    val resp = JSONArray(response)
-                    val list = mutableListOf<Album>()
-                    for (i in 0 until resp.length()) {
-                        val item = resp.getJSONObject(i)
-                        list.add(
-                            i, Album(
-                                id = item.getInt("id"),
-                                name = item.getString("name"),
-                                cover = item.getString("cover"),
-                                recordLabel = item.getString("recordLabel"),
-                                releaseDate = item.getString("releaseDate"),
-                                genre = item.getString("genre"),
-                                description = item.getString("description")
-                            )
-                        )
-                    }
+                    val list = FillResponseAlbumTask().execute(response).get()
                     cont.resume(list)
                 },
                 { error -> cont.resumeWithException(error) }
@@ -161,48 +214,7 @@ class NetworkServiceAdapter private constructor(private val context: Context) {
         onError: (error: VolleyError) -> Unit
     ) {
         requestQueue.add(getRequest("musicians", { response ->
-            val resp = JSONArray(response)
-            val list = mutableListOf<Musician>()
-            for (i in 0 until resp.length()) {
-                val item = resp.getJSONObject(i)
-                val albumList = mutableListOf<Album>()
-                val albumsArray = item.getJSONArray("albums")
-                // Itera el arreglo de albums utilizando otro bucle for
-                for (j in 0 until albumsArray.length()) {
-                    val albumObject = albumsArray.getJSONObject(j)
-                    val albumId = albumObject.getInt("id")
-                    val albumName = albumObject.getString("name")
-                    val albumCover = albumObject.getString("cover")
-                    val releaseDate = albumObject.getString("releaseDate")
-                    val description = albumObject.getString("description")
-                    val genre = albumObject.getString("genre")
-                    val recordLabel = albumObject.getString("recordLabel")
-                    albumList.add(
-                        j,
-                        Album(
-                            name = albumName,
-                            cover = albumCover,
-                            releaseDate = releaseDate,
-                            description = description,
-                            genre = genre,
-                            recordLabel = recordLabel,
-                            id = albumId
-                        )
-                    )
-
-
-                    // Accede a las propiedades del álbum
-                }
-                list.add(
-                    i, Musician(
-                        id = item.getInt("id"),
-                        name = item.getString("name"),
-                        image = item.getString("image"),
-                        description = item.getString("description"),
-                        birthDate = item.getString("birthDate"), albums = albumList
-                    )
-                )
-            }
+            val list = FillResponseArtistTask().execute(response).get()
             onComplete(list)
         }, {
             onError(it)
